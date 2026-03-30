@@ -13,56 +13,17 @@
       text-align: center;
     }
 
-    header {
-      background: #111827;
-      padding: 20px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #22c55e;
-    }
-
+    header { background: #111827; padding: 20px; font-size: 30px; font-weight: bold; color: #22c55e; }
     section { padding: 60px 20px; }
-
     h1 { font-size: 40px; }
-
-    hr {
-      width: 200px;
-      margin: 10px auto 30px;
-      border: 1px solid #22c55e;
-    }
-
+    hr { width: 200px; margin: 10px auto 30px; border: 1px solid #22c55e; }
     .slogan span { color: #38bdf8; text-decoration: underline; }
-
     .servicios p { margin: 8px; font-size: 18px; }
+    .pasos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .paso { background: #1e293b; padding: 20px; width: 220px; border-radius: 15px; transition: 0.3s; }
+    .paso:hover { transform: translateY(-8px); background: #38bdf8; color: black; }
 
-    .pasos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .paso {
-      background: #1e293b;
-      padding: 20px;
-      width: 220px;
-      border-radius: 15px;
-      transition: 0.3s;
-    }
-
-    .paso:hover {
-      transform: translateY(-8px);
-      background: #38bdf8;
-      color: black;
-    }
-
-    .precios {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
+    .precios { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
     .card {
       background: #1e293b;
       padding: 20px;
@@ -74,30 +35,16 @@
       overflow: hidden;
       color: white;
     }
+    .card:hover:not(.pro) { transform: translateY(-10px) scale(1.05); background: #22c55e; color: black; }
 
-    .card:hover:not(.pro) {
-      transform: translateY(-10px) scale(1.05);
-      background: #22c55e;
-      color: black;
-    }
-
-    /* Tarjeta Pro base */
-    .card.pro {
-      background: #1f2a38; /* casi igual que las demás, un toque más amarillo */
+    .card.pro { 
+      background: #1f2a38; /* un toque más amarillo */
       color: white;
       border: 2px solid #fbbf24;
       box-shadow: 0 5px 15px rgba(255, 223, 93, 0.2);
       transition: all 0.5s ease;
     }
-
-    .card.pro h3::after {
-      content: " 👑";
-      position: relative;
-      left: 5px;
-      font-size: 20px;
-    }
-
-    /* Hover: oro líquido + partículas + texto negro */
+    .card.pro h3::after { content: " 👑"; position: relative; left: 5px; font-size: 20px; }
     .card.pro:hover {
       background: linear-gradient(120deg, #fcd34d, #fbbf24, #fde68a, #facc15);
       background-size: 600% 600%;
@@ -106,65 +53,36 @@
       transform: translateY(-10px) scale(1.05);
       color: black;
     }
+    @keyframes shineGold { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
 
-    @keyframes shineGold {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    .precio { font-size: 22px; font-weight: bold; margin: 10px 0; position: relative; }
+    .particles span { position: absolute; top:50%; left:50%; pointer-events:none; transform: translate(-50%, -50%); font-size:14px; opacity:1; }
 
-    .precio {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0;
-      position: relative;
-    }
+    .redes { display: flex; flex-direction: column; align-items: center; gap:15px; }
+    .redes a { width:220px; padding:12px; background:#1e293b; border-radius:15px; text-decoration:none; color:white; font-size:18px; transition: all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+    .redes a:hover { transform: translateY(-5px) scale(1.05); background: #22c55e; color: black; }
 
-    .particles span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      font-size: 14px;
-      opacity: 1;
-    }
-
-    .redes {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .redes a {
-      width: 220px;
-      padding: 12px;
-      background: #1e293b;
-      border-radius: 15px;
-      text-decoration: none;
+    .btnNequi {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background-color: #22c55e;
       color: white;
-      font-size: 18px;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-
-    .redes a:hover {
-      transform: translateY(-5px) scale(1.05);
-      background: #22c55e;
-      color: black;
-    }
+    .btnNequi:hover { transform: scale(1.05); }
+    .qrContainer { margin-top: 10px; }
   </style>
 </head>
-
 <body>
 
 <header>🌎 ExpiLingo</header>
 
 <section>
-  <h1 class="slogan">
-    No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar
-  </h1>
+  <h1 class="slogan">No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar</h1>
   <p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
 </section>
 
@@ -215,6 +133,7 @@ const precios = [
 ];
 
 const container = document.getElementById("precios-container");
+const nequiBase = "https://nequi.com.co/573102270396"; // tu número real
 
 precios.forEach(item=>{
   const card = document.createElement("div");
@@ -223,11 +142,32 @@ precios.forEach(item=>{
   card.innerHTML=`<h3>${item.titulo}</h3>
     <p class="precio">$${item.precio.toLocaleString()}<span class="particles"></span></p>
     <p>${item.descripcion}</p>`;
+  
+  // Botón Nequi y contenedor QR
+  const btn = document.createElement('button');
+  btn.textContent = "💰 Pagar con Nequi";
+  btn.className = "btnNequi";
+  const qrDiv = document.createElement('div');
+  qrDiv.className = "qrContainer";
+  card.appendChild(btn);
+  card.appendChild(qrDiv);
+
+  // Evento clic para generar QR dinámico
+  btn.addEventListener('click', ()=>{
+    const monto = card.dataset.price;
+    const qrLink = `${nequiBase}?amount=${monto}`;
+    qrDiv.innerHTML = `
+      <p>Escanea este código con Nequi para pagar $${parseInt(monto).toLocaleString()}</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrLink)}" />
+      <p>Después de pagar, revisa tu cuenta y confirma manualmente el pago.</p>
+    `;
+  });
+
   container.appendChild(card);
 });
 
+// Efectos partículas
 const cards=document.querySelectorAll('.card');
-
 cards.forEach(card=>{
   const priceSpan=card.querySelector('.precio span');
   const price=parseInt(card.dataset.price);
