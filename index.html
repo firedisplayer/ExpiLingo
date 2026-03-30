@@ -21,13 +21,9 @@
       color: #22c55e;
     }
 
-    section {
-      padding: 60px 20px;
-    }
+    section { padding: 60px 20px; }
 
-    h1 {
-      font-size: 40px;
-    }
+    h1 { font-size: 40px; }
 
     hr {
       width: 200px;
@@ -35,19 +31,10 @@
       border: 1px solid #22c55e;
     }
 
-    /* ESLOGAN */
-    .slogan span {
-      color: #38bdf8;
-      text-decoration: underline;
-    }
+    .slogan span { color: #38bdf8; text-decoration: underline; }
 
-    /* SERVICIOS */
-    .servicios p {
-      margin: 8px;
-      font-size: 18px;
-    }
+    .servicios p { margin: 8px; font-size: 18px; }
 
-    /* PASOS */
     .pasos {
       display: flex;
       flex-wrap: wrap;
@@ -69,7 +56,6 @@
       color: black;
     }
 
-    /* TARJETAS DE PRECIOS */
     .precios {
       display: flex;
       flex-wrap: wrap;
@@ -95,24 +81,13 @@
       color: black;
     }
 
+    /* Tarjeta Pro base */
     .card.pro {
-      background: linear-gradient(135deg, #facc15, #fcd34d, #fbbf24);
-      background-size: 400% 400%;
-      animation: shine 8s linear infinite;
-      color: black;
-      box-shadow: 0 0 15px #facc15, 0 0 30px #fcd34d, 0 0 45px #fbbf24;
+      background: #1f2a38; /* casi igual que las demás, un toque más amarillo */
+      color: white;
       border: 2px solid #fbbf24;
-    }
-
-    .card.pro:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 0 25px #facc15, 0 0 50px #fcd34d, 0 0 75px #fbbf24;
-    }
-
-    @keyframes shine {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      box-shadow: 0 5px 15px rgba(255, 223, 93, 0.2);
+      transition: all 0.5s ease;
     }
 
     .card.pro h3::after {
@@ -120,6 +95,22 @@
       position: relative;
       left: 5px;
       font-size: 20px;
+    }
+
+    /* Hover: oro líquido + partículas + texto negro */
+    .card.pro:hover {
+      background: linear-gradient(120deg, #fcd34d, #fbbf24, #fde68a, #facc15);
+      background-size: 600% 600%;
+      animation: shineGold 8s ease infinite;
+      box-shadow: 0 0 25px #fcd34d, 0 0 50px #fbbf24, 0 0 75px #fde68a;
+      transform: translateY(-10px) scale(1.05);
+      color: black;
+    }
+
+    @keyframes shineGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .precio {
@@ -139,7 +130,6 @@
       opacity: 1;
     }
 
-    /* REDES */
     .redes {
       display: flex;
       flex-direction: column;
@@ -169,9 +159,7 @@
 
 <body>
 
-<header>
-  🌎 ExpiLingo
-</header>
+<header>🌎 ExpiLingo</header>
 
 <section>
   <h1 class="slogan">
@@ -191,43 +179,24 @@
 <section>
   <h2>¿Cómo funciona?</h2>
   <hr>
-
   <div class="pasos">
-    <div class="paso">
-      <h3>1. Escríbenos</h3>
-      <p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p>
-    </div>
-
-    <div class="paso">
-      <h3>2. Revisamos tu tarea</h3>
-      <p>Analizamos el ejercicio o texto que necesitas entender.</p>
-    </div>
-
-    <div class="paso">
-      <h3>3. Te explicamos paso a paso</h3>
-      <p>No solo te damos la respuesta, te ayudamos a comprenderla.</p>
-    </div>
-
-    <div class="paso">
-      <h3>4. Tú lo completas</h3>
-      <p>Aprendes y terminas tu tarea con seguridad.</p>
-    </div>
+    <div class="paso"><h3>1. Escríbenos</h3><p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p></div>
+    <div class="paso"><h3>2. Revisamos tu tarea</h3><p>Analizamos el ejercicio o texto que necesitas entender.</p></div>
+    <div class="paso"><h3>3. Te explicamos paso a paso</h3><p>No solo te damos la respuesta, te ayudamos a comprenderla.</p></div>
+    <div class="paso"><h3>4. Tú lo completas</h3><p>Aprendes y terminas tu tarea con seguridad.</p></div>
   </div>
 </section>
 
 <section>
   <h2>Precios</h2>
   <hr>
-
   <p><strong>💬 Primera ayuda GRATIS (1 por persona)</strong></p>
-
   <div class="precios" id="precios-container"></div>
 </section>
 
 <section id="contacto">
   <h2>Contáctanos</h2>
   <hr>
-
   <div class="redes">
     <a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
     <a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
@@ -238,63 +207,50 @@
 
 <script>
 const precios = [
-  {titulo: "30 min", precio: 20000, descripcion: "Explicación rápida", pro: false},
-  {titulo: "1 hora", precio: 30000, descripcion: "Sesión completa", pro: false},
-  {titulo: "Básico", precio: 15000, descripcion: "3 ayudas", pro: false},
-  {titulo: "Estándar", precio: 25000, descripcion: "8 ayudas 🔥", pro: false},
-  {titulo: "Pro", precio: 75000, descripcion: "1 semana", pro: true},
+  {titulo:"30 min", precio:20000, descripcion:"Explicación rápida", pro:false},
+  {titulo:"1 hora", precio:30000, descripcion:"Sesión completa", pro:false},
+  {titulo:"Básico", precio:15000, descripcion:"3 ayudas", pro:false},
+  {titulo:"Estándar", precio:25000, descripcion:"8 ayudas 🔥", pro:false},
+  {titulo:"Pro", precio:75000, descripcion:"1 semana", pro:true},
 ];
 
 const container = document.getElementById("precios-container");
 
-precios.forEach(item => {
+precios.forEach(item=>{
   const card = document.createElement("div");
-  card.className = "card" + (item.pro ? " pro" : "");
-  card.dataset.price = item.precio;
-
-  card.innerHTML = `
-    <h3>${item.titulo}</h3>
+  card.className="card"+(item.pro?" pro":"");
+  card.dataset.price=item.precio;
+  card.innerHTML=`<h3>${item.titulo}</h3>
     <p class="precio">$${item.precio.toLocaleString()}<span class="particles"></span></p>
-    <p>${item.descripcion}</p>
-  `;
-
+    <p>${item.descripcion}</p>`;
   container.appendChild(card);
 });
 
-// Partículas
-const cards = document.querySelectorAll('.card');
+const cards=document.querySelectorAll('.card');
 
-cards.forEach(card => {
-  const priceSpan = card.querySelector('.precio span');
-  let rawPrice = card.dataset.price;
-  let price = parseInt(rawPrice.toString().replace(/[^\d]/g, ''));
-  const isPro = card.classList.contains('pro');
+cards.forEach(card=>{
+  const priceSpan=card.querySelector('.precio span');
+  const price=parseInt(card.dataset.price);
+  const isPro=card.classList.contains('pro');
 
-  card.addEventListener('mouseenter', () => {
-    const count = Math.min(Math.floor(price / 5000), 30);
-
-    for (let i = 0; i < count; i++) {
-      const particle = document.createElement('span');
-      particle.textContent = isPro ? (Math.random() < 0.5 ? "👑" : "💎") : "💵";
-      particle.style.position = 'absolute';
-      particle.style.top = '50%';
-      particle.style.left = '50%';
-      particle.style.fontSize = (10 + Math.random() * 20) + 'px';
-      particle.style.opacity = 1;
-      particle.style.transition = 'all 0.8s ease-out';
+  card.addEventListener('mouseenter',()=>{
+    const count=Math.min(Math.floor(price/5000),30);
+    for(let i=0;i<count;i++){
+      const particle=document.createElement('span');
+      particle.textContent=isPro?(Math.random()<0.5?"👑":"💎"):"💵";
+      particle.style.position='absolute';
+      particle.style.top='50%';
+      particle.style.left='50%';
+      particle.style.fontSize=(10+Math.random()*20)+'px';
+      particle.style.opacity=1;
+      particle.style.transition='all 0.8s ease-out';
       priceSpan.appendChild(particle);
-
-      const angle = Math.random() * 2 * Math.PI;
-      const distance = 50 + Math.random() * 50;
-      const dx = Math.cos(angle) * distance;
-      const dy = Math.sin(angle) * distance;
-
-      setTimeout(() => {
-        particle.style.transform = `translate(${dx}px, ${dy}px)`;
-        particle.style.opacity = 0;
-      }, 10);
-
-      setTimeout(() => particle.remove(), 900);
+      const angle=Math.random()*2*Math.PI;
+      const distance=50+Math.random()*50;
+      const dx=Math.cos(angle)*distance;
+      const dy=Math.sin(angle)*distance;
+      setTimeout(()=>{particle.style.transform=`translate(${dx}px,${dy}px)`; particle.style.opacity=0;},10);
+      setTimeout(()=>particle.remove(),900);
     }
   });
 });
