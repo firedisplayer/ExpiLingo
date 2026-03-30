@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ExpiLingo</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: linear-gradient(135deg, #0a0f1f, #020617);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      background: #111827;
+      padding: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
+    section {
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    hr {
+      width: 200px;
+      margin: 10px auto 30px;
+      border: 1px solid #22c55e;
+    }
+
+    /* ESLOGAN */
+    .slogan span {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    /* SERVICIOS */
+    .servicios p {
+      margin: 8px;
+      font-size: 18px;
+    }
+
+    /* PASOS */
+    .pasos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .paso {
+      background: #1e293b;
+      padding: 20px;
+      width: 220px;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+
+    .paso:hover {
+      transform: translateY(-8px);
+      background: #38bdf8;
+      color: black;
+    }
+
+    /* TARJETAS DE PRECIOS */
+    .precios {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      width: 220px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: #22c55e;
+      color: black;
+    }
+
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    /* REDES */
+    .redes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .redes a {
+      width: 220px;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 15px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .redes a:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: #22c55e;
+      color: black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  🌎 ExpiLingo
+</header>
+
+<section>
+  <h1 class="slogan">
+    No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar
+  </h1>
+  <p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
+</section>
+
+<section class="servicios">
+  <h2>Servicios</h2>
+  <p>✔ Tutorías personalizadas</p>
+  <p>✔ Explicación de tareas paso a paso</p>
+  <p>✔ Corrección de textos</p>
+  <p>✔ Traducción inglés-español</p>
+</section>
+
+<section>
+  <h2>¿Cómo funciona?</h2>
+  <hr>
+
+  <div class="pasos">
+    <div class="paso">
+      <h3>1. Escríbenos</h3>
+      <p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p>
+    </div>
+
+    <div class="paso">
+      <h3>2. Revisamos tu tarea</h3>
+      <p>Analizamos el ejercicio o texto que necesitas entender.</p>
+    </div>
+
+    <div class="paso">
+      <h3>3. Te explicamos paso a paso</h3>
+      <p>No solo te damos la respuesta, te ayudamos a comprenderla.</p>
+    </div>
+
+    <div class="paso">
+      <h3>4. Tú lo completas</h3>
+      <p>Aprendes y terminas tu tarea con seguridad.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Precios</h2>
+  <hr>
+
+  <p><strong>💬 Primera ayuda GRATIS (1 por persona)</strong></p>
+
+  <div class="precios">
+
+    <div class="card">
+      <h3>30 min</h3>
+      <p class="precio">$10.000</p>
+      <p>Explicación rápida</p>
+    </div>
+
+    <div class="card">
+      <h3>1 hora</h3>
+      <p class="precio">$20.000</p>
+      <p>Sesión completa</p>
+    </div>
+
+    <div class="card">
+      <h3>Básico</h3>
+      <p class="precio">$15.000</p>
+      <p>3 ayudas</p>
+    </div>
+
+    <div class="card">
+      <h3>Estándar</h3>
+      <p class="precio">$20.000</p>
+      <p>8 ayudas 🔥</p>
+    </div>
+
+    <div class="card">
+      <h3>Pro</h3>
+      <p class="precio">$50.000</p>
+      <p>1 semana</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contacto">
+  <h2>Contáctanos</h2>
+  <hr>
+
+  <div class="redes">
+    <a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
+    <a href="https://wa.me/573001234567" target="_blank">💬 WhatsApp</a>
+    <a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
+    <a href="https://x.com/expilingo" target="_blank">🐦 X</a>
+  </div>
+</section>
+
+</body>
+</html>
