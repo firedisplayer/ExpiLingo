@@ -207,31 +207,31 @@
 
   <div class="precios">
 
-    <div class="card" data-price="20.000 COP">
+    <div class="card" data-price="20000">
       <h3>30 min</h3>
       <p class="precio">$20.000<span class="particles"></span></p>
       <p>Explicación rápida</p>
     </div>
 
-    <div class="card" data-price="30.000 COP">
+    <div class="card" data-price="30000">
       <h3>1 hora</h3>
       <p class="precio">$30.000<span class="particles"></span></p>
       <p>Sesión completa</p>
     </div>
 
-    <div class="card" data-price="15.000 COP">
+    <div class="card" data-price="15000">
       <h3>Básico</h3>
       <p class="precio">$15.000<span class="particles"></span></p>
       <p>3 ayudas</p>
     </div>
 
-    <div class="card" data-price="25.000 COP">
+    <div class="card" data-price="25000">
       <h3>Estándar</h3>
       <p class="precio">$25.000<span class="particles"></span></p>
       <p>8 ayudas 🔥</p>
     </div>
 
-    <div class="card pro" data-price="75.000 COP">
+    <div class="card pro" data-price="75000">
       <h3>Pro</h3>
       <p class="precio">$75.000<span class="particles"></span></p>
       <p>1 semana</p>
@@ -257,7 +257,11 @@ const cards = document.querySelectorAll('.card');
 
 cards.forEach(card => {
   const priceSpan = card.querySelector('.precio span');
-  const price = parseInt(card.dataset.price);
+  let rawPrice = card.dataset.price;
+
+  // Convertir a número: quitar puntos, comas y texto (COP)
+  let price = parseInt(rawPrice.replace(/[^\d]/g, ''));
+
   const isPro = card.classList.contains('pro');
 
   card.addEventListener('mouseenter', () => {
