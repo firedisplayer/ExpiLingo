@@ -86,6 +86,7 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       position: relative;
       overflow: hidden;
+      color: white;
     }
 
     .card:hover:not(.pro) {
@@ -94,9 +95,24 @@
       color: black;
     }
 
-    .card.pro:hover {
-      background: #facc15 !important; /* amarillo */
+    .card.pro {
+      background: linear-gradient(135deg, #facc15, #fcd34d, #fbbf24);
+      background-size: 400% 400%;
+      animation: shine 8s linear infinite;
       color: black;
+      box-shadow: 0 0 15px #facc15, 0 0 30px #fcd34d, 0 0 45px #fbbf24;
+      border: 2px solid #fbbf24;
+    }
+
+    .card.pro:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 25px #facc15, 0 0 50px #fcd34d, 0 0 75px #fbbf24;
+    }
+
+    @keyframes shine {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .card.pro h3::after {
@@ -205,39 +221,7 @@
 
   <p><strong>💬 Primera ayuda GRATIS (1 por persona)</strong></p>
 
-  <div class="precios">
-
-    <div class="card" data-price="20000">
-      <h3>30 min</h3>
-      <p class="precio">$20.000<span class="particles"></span></p>
-      <p>Explicación rápida</p>
-    </div>
-
-    <div class="card" data-price="30000">
-      <h3>1 hora</h3>
-      <p class="precio">$30.000<span class="particles"></span></p>
-      <p>Sesión completa</p>
-    </div>
-
-    <div class="card" data-price="15000">
-      <h3>Básico</h3>
-      <p class="precio">$15.000<span class="particles"></span></p>
-      <p>3 ayudas</p>
-    </div>
-
-    <div class="card" data-price="25000">
-      <h3>Estándar</h3>
-      <p class="precio">$25.000<span class="particles"></span></p>
-      <p>8 ayudas 🔥</p>
-    </div>
-
-    <div class="card pro" data-price="75000">
-      <h3>Pro</h3>
-      <p class="precio">$75.000<span class="particles"></span></p>
-      <p>1 semana</p>
-    </div>
-
-  </div>
+  <div class="precios" id="precios-container"></div>
 </section>
 
 <section id="contacto">
@@ -253,15 +237,37 @@
 </section>
 
 <script>
+const precios = [
+  {titulo: "30 min", precio: 20000, descripcion: "Explicación rápida", pro: false},
+  {titulo: "1 hora", precio: 30000, descripcion: "Sesión completa", pro: false},
+  {titulo: "Básico", precio: 15000, descripcion: "3 ayudas", pro: false},
+  {titulo: "Estándar", precio: 25000, descripcion: "8 ayudas 🔥", pro: false},
+  {titulo: "Pro", precio: 75000, descripcion: "1 semana", pro: true},
+];
+
+const container = document.getElementById("precios-container");
+
+precios.forEach(item => {
+  const card = document.createElement("div");
+  card.className = "card" + (item.pro ? " pro" : "");
+  card.dataset.price = item.precio;
+
+  card.innerHTML = `
+    <h3>${item.titulo}</h3>
+    <p class="precio">$${item.precio.toLocaleString()}<span class="particles"></span></p>
+    <p>${item.descripcion}</p>
+  `;
+
+  container.appendChild(card);
+});
+
+// Partículas
 const cards = document.querySelectorAll('.card');
 
 cards.forEach(card => {
   const priceSpan = card.querySelector('.precio span');
   let rawPrice = card.dataset.price;
-
-  // Convertir a número: quitar puntos, comas y texto (COP)
-  let price = parseInt(rawPrice.replace(/[^\d]/g, ''));
-
+  let price = parseInt(rawPrice.toString().replace(/[^\d]/g, ''));
   const isPro = card.classList.contains('pro');
 
   card.addEventListener('mouseenter', () => {
@@ -269,10 +275,7 @@ cards.forEach(card => {
 
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('span');
-
-      // Pro → coronas y diamantes, otros → billetes
       particle.textContent = isPro ? (Math.random() < 0.5 ? "👑" : "💎") : "💵";
-
       particle.style.position = 'absolute';
       particle.style.top = '50%';
       particle.style.left = '50%';
@@ -281,7 +284,6 @@ cards.forEach(card => {
       particle.style.transition = 'all 0.8s ease-out';
       priceSpan.appendChild(particle);
 
-      // Explosión circular
       const angle = Math.random() * 2 * Math.PI;
       const distance = 50 + Math.random() * 50;
       const dx = Math.cos(angle) * distance;
