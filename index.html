@@ -235,10 +235,10 @@ precios.forEach(item => {
 
   btn.addEventListener("click", () => {
     const monto = card.dataset.price;
-    const nequiBase = "https://nequi.com.co/573012345678"; // <-- reemplaza con tu número
+    const nequiBase = "https://nequi.com.co/573102270396"; // <-- reemplaza con tu número
     const qrLink = `${nequiBase}?amount=${monto}`;
 
-    btn.textContent = isMobile ? "💳 Dale click al código QR" : "📲 Escanea el código QR";
+    btn.textContent = isMobile ? "💳 Dale click al código QR" : "📲 Escanea el código QR con tu celular";
     qrDiv.innerHTML = `<a href="${qrLink}" target="_blank">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrLink)}" alt="QR Nequi">
     </a>`;
