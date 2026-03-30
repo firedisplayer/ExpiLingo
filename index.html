@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>ExpiLingo</title>
-
   <style>
     body {
       font-family: Arial;
@@ -13,17 +12,51 @@
       text-align: center;
     }
 
-    header { background: #111827; padding: 20px; font-size: 30px; font-weight: bold; color: #22c55e; }
+    header {
+      background: #111827;
+      padding: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
     section { padding: 60px 20px; }
     h1 { font-size: 40px; }
-    hr { width: 200px; margin: 10px auto 30px; border: 1px solid #22c55e; }
+    hr {
+      width: 200px;
+      margin: 10px auto 30px;
+      border: 1px solid #22c55e;
+    }
+
     .slogan span { color: #38bdf8; text-decoration: underline; }
     .servicios p { margin: 8px; font-size: 18px; }
-    .pasos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .paso { background: #1e293b; padding: 20px; width: 220px; border-radius: 15px; transition: 0.3s; }
-    .paso:hover { transform: translateY(-8px); background: #38bdf8; color: black; }
 
-    .precios { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .pasos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .paso {
+      background: #1e293b;
+      padding: 20px;
+      width: 220px;
+      border-radius: 15px;
+      transition: 0.3s;
+    }
+    .paso:hover {
+      transform: translateY(-8px);
+      background: #38bdf8;
+      color: black;
+    }
+
+    /* Tarjetas de precios */
+    .precios {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
     .card {
       background: #1e293b;
       padding: 20px;
@@ -35,16 +68,26 @@
       overflow: hidden;
       color: white;
     }
-    .card:hover:not(.pro) { transform: translateY(-10px) scale(1.05); background: #22c55e; color: black; }
+    .card:hover:not(.pro) {
+      transform: translateY(-10px) scale(1.05);
+      background: #22c55e;
+      color: black;
+    }
 
-    .card.pro { 
-      background: #1f2a38; /* un toque más amarillo */
+    /* Tarjeta Pro */
+    .card.pro {
+      background: #1f2a38; /* igual que las demás, solo un toque más amarillo */
       color: white;
       border: 2px solid #fbbf24;
       box-shadow: 0 5px 15px rgba(255, 223, 93, 0.2);
       transition: all 0.5s ease;
     }
-    .card.pro h3::after { content: " 👑"; position: relative; left: 5px; font-size: 20px; }
+    .card.pro h3::after {
+      content: " 👑";
+      position: relative;
+      left: 5px;
+      font-size: 20px;
+    }
     .card.pro:hover {
       background: linear-gradient(120deg, #fcd34d, #fbbf24, #fde68a, #facc15);
       background-size: 600% 600%;
@@ -53,28 +96,63 @@
       transform: translateY(-10px) scale(1.05);
       color: black;
     }
-    @keyframes shineGold { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
+    @keyframes shineGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-    .precio { font-size: 22px; font-weight: bold; margin: 10px 0; position: relative; }
-    .particles span { position: absolute; top:50%; left:50%; pointer-events:none; transform: translate(-50%, -50%); font-size:14px; opacity:1; }
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+      position: relative;
+    }
+    .particles span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      opacity: 1;
+    }
 
-    .redes { display: flex; flex-direction: column; align-items: center; gap:15px; }
-    .redes a { width:220px; padding:12px; background:#1e293b; border-radius:15px; text-decoration:none; color:white; font-size:18px; transition: all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
-    .redes a:hover { transform: translateY(-5px) scale(1.05); background: #22c55e; color: black; }
-
-    .btnNequi {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      background-color: #22c55e;
+    .redes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .redes a {
+      width: 220px;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 15px;
+      text-decoration: none;
       color: white;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .redes a:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: #22c55e;
+      color: black;
+    }
+    .pagar-btn {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #22c55e;
+      color: black;
       transition: all 0.3s ease;
     }
-    .btnNequi:hover { transform: scale(1.05); }
-    .qrContainer { margin-top: 10px; }
+    .pagar-btn:hover { background: #16a34a; }
+    .qr-container { margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -82,7 +160,9 @@
 <header>🌎 ExpiLingo</header>
 
 <section>
-  <h1 class="slogan">No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar</h1>
+  <h1 class="slogan">
+    No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar
+  </h1>
   <p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
 </section>
 
@@ -133,68 +213,68 @@ const precios = [
 ];
 
 const container = document.getElementById("precios-container");
-const nequiBase = "https://nequi.com.co/573102270396"; // tu número real
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-precios.forEach(item=>{
+precios.forEach(item => {
   const card = document.createElement("div");
-  card.className="card"+(item.pro?" pro":"");
-  card.dataset.price=item.precio;
-  card.innerHTML=`<h3>${item.titulo}</h3>
-    <p class="precio">$${item.precio.toLocaleString()}<span class="particles"></span></p>
-    <p>${item.descripcion}</p>`;
-  
-  // Botón Nequi y contenedor QR
-  const btn = document.createElement('button');
-  btn.textContent = "💰 Pagar con Nequi";
-  btn.className = "btnNequi";
-  const qrDiv = document.createElement('div');
-  qrDiv.className = "qrContainer";
-  card.appendChild(btn);
-  card.appendChild(qrDiv);
+  card.className = "card" + (item.pro ? " pro" : "");
+  card.dataset.price = item.precio;
 
-  // Evento clic para generar QR dinámico
-  btn.addEventListener('click', ()=>{
-    const monto = card.dataset.price;
-    const qrLink = `${nequiBase}?amount=${monto}`;
-    qrDiv.innerHTML = `
-      <p>Escanea este código con Nequi para pagar $${parseInt(monto).toLocaleString()}</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrLink)}" />
-      <p>Después de pagar, revisa tu cuenta y confirma manualmente el pago.</p>
-    `;
-  });
+  card.innerHTML = `
+    <h3>${item.titulo}${item.pro ? " 👑" : ""}</h3>
+    <p class="precio">$${item.precio.toLocaleString()}<span class="particles"></span></p>
+    <p>${item.descripcion}</p>
+    <button class="pagar-btn">💰 Pagar con Nequi</button>
+    <div class="qr-container"></div>
+  `;
 
   container.appendChild(card);
+
+  const btn = card.querySelector(".pagar-btn");
+  const qrDiv = card.querySelector(".qr-container");
+
+  btn.addEventListener("click", () => {
+    const monto = card.dataset.price;
+    const nequiBase = "https://nequi.com.co/573012345678"; // <-- reemplaza con tu número
+    const qrLink = `${nequiBase}?amount=${monto}`;
+
+    btn.textContent = isMobile ? "💳 Dale click al código QR" : "📲 Escanea el código QR";
+    qrDiv.innerHTML = `<a href="${qrLink}" target="_blank">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrLink)}" alt="QR Nequi">
+    </a>`;
+  });
 });
 
-// Efectos partículas
-const cards=document.querySelectorAll('.card');
-cards.forEach(card=>{
-  const priceSpan=card.querySelector('.precio span');
-  const price=parseInt(card.dataset.price);
-  const isPro=card.classList.contains('pro');
+// Partículas de dinero / coronas
+const cardsAll = document.querySelectorAll('.card');
+cardsAll.forEach(card => {
+  const priceSpan = card.querySelector('.precio span');
+  const price = parseInt(card.dataset.price);
+  const isPro = card.classList.contains('pro');
 
-  card.addEventListener('mouseenter',()=>{
-    const count=Math.min(Math.floor(price/5000),30);
-    for(let i=0;i<count;i++){
-      const particle=document.createElement('span');
-      particle.textContent=isPro?(Math.random()<0.5?"👑":"💎"):"💵";
-      particle.style.position='absolute';
-      particle.style.top='50%';
-      particle.style.left='50%';
-      particle.style.fontSize=(10+Math.random()*20)+'px';
-      particle.style.opacity=1;
-      particle.style.transition='all 0.8s ease-out';
+  card.addEventListener('mouseenter', () => {
+    const count = Math.min(Math.floor(price/5000), 30);
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('span');
+      particle.textContent = isPro ? (Math.random() < 0.5 ? "👑" : "💎") : "💵";
+      particle.style.position = 'absolute';
+      particle.style.top = '50%';
+      particle.style.left = '50%';
+      particle.style.fontSize = (10 + Math.random()*20) + 'px';
+      particle.style.opacity = 1;
+      particle.style.transition = 'all 0.8s ease-out';
       priceSpan.appendChild(particle);
-      const angle=Math.random()*2*Math.PI;
-      const distance=50+Math.random()*50;
-      const dx=Math.cos(angle)*distance;
-      const dy=Math.sin(angle)*distance;
-      setTimeout(()=>{particle.style.transform=`translate(${dx}px,${dy}px)`; particle.style.opacity=0;},10);
-      setTimeout(()=>particle.remove(),900);
+
+      const angle = Math.random()*2*Math.PI;
+      const distance = 50 + Math.random()*50;
+      const dx = Math.cos(angle)*distance;
+      const dy = Math.sin(angle)*distance;
+
+      setTimeout(()=>{ particle.style.transform=`translate(${dx}px, ${dy}px)`; particle.style.opacity=0; }, 10);
+      setTimeout(()=>particle.remove(), 900);
     }
   });
 });
 </script>
-
 </body>
 </html>
