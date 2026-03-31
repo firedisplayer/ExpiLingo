@@ -3,22 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <title>ExpiLingo</title>
+
 <style>
-body { font-family: Arial; margin:0; background: linear-gradient(135deg,#0a0f1f,#020617); color:white; text-align:center; }
-header { background:#111827; padding:20px; font-size:30px; font-weight:bold; color:#22c55e; }
+body {
+  font-family: Arial;
+  margin:0;
+  background: linear-gradient(135deg,#0a0f1f,#020617);
+  color:white;
+  text-align:center;
+}
+
+header {
+  background:#111827;
+  padding:20px;
+  font-size:30px;
+  font-weight:bold;
+  color:#22c55e;
+}
+
 section { padding:60px 20px; }
+
 h1 { font-size:40px; }
-hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
-.slogan span { color:#38bdf8; text-decoration:underline; }
-.servicios p { margin:8px; font-size:18px; }
 
-.precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.card { background:#1e293b; padding:20px; width:220px; border-radius:20px; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
-.card:hover { transform:translateY(-10px) scale(1.05); background:#22c55e; color:black; }
+hr {
+  width:200px;
+  margin:10px auto 30px;
+  border:1px solid #22c55e;
+}
 
-.precio { font-size:22px; font-weight:bold; margin:10px 0; }
+.slogan span {
+  color:#38bdf8;
+  text-decoration:underline;
+}
 
-.redes { display:flex; flex-direction:column; align-items:center; gap:15px; }
+.servicios p {
+  margin:8px;
+  font-size:18px;
+}
+
+.pasos {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.paso {
+  background:#1e293b;
+  padding:20px;
+  width:220px;
+  border-radius:15px;
+  transition:0.3s;
+}
+
+.paso:hover {
+  transform:translateY(-8px);
+  background:#38bdf8;
+  color:black;
+}
+
+.precios {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.card {
+  background:#1e293b;
+  padding:20px;
+  width:220px;
+  border-radius:20px;
+  transition:all 0.3s ease;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  position:relative;
+  overflow:hidden;
+  color:white;
+}
+
+.card:hover:not(.pro) {
+  transform:translateY(-10px) scale(1.05);
+  background:#22c55e;
+  color:black;
+}
+
+/* PRO */
+.card.pro {
+  background:#1f2a38;
+  border:2px solid #fbbf24;
+}
+
+.card.pro h3::after {
+  content:" 👑";
+}
+
+.card.pro:hover {
+  background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15);
+  background-size:600% 600%;
+  animation:shineGold 8s ease infinite;
+  box-shadow:0 0 25px #fcd34d;
+  transform:translateY(-10px) scale(1.05);
+  color:black;
+}
+
+@keyframes shineGold {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+.precio {
+  font-size:22px;
+  font-weight:bold;
+}
+
+.descripcion {
+  font-size:14px;
+  margin:10px 0;
+}
+
+.redes {
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  align-items:center;
+}
+
 .redes a {
   width:220px;
   padding:12px;
@@ -26,10 +136,12 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   border-radius:15px;
   text-decoration:none;
   color:white;
-  font-size:18px;
-  transition:0.3s;
 }
-.redes a:hover { background:#22c55e; color:black; transform:scale(1.05); }
+
+.redes a:hover {
+  background:#22c55e;
+  color:black;
+}
 
 .btn-pay {
   margin-top:10px;
@@ -39,31 +151,36 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   border:none;
   border-radius:10px;
   cursor:pointer;
-  font-weight:bold;
 }
-.btn-pay:hover { background:#16a34a; }
 
 #qr-overlay {
   display:none;
   position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.9);
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  z-index:1000;
 }
 
 #qr-overlay img {
   max-width:250px;
   margin:20px 0;
-  border:5px solid white;
-  border-radius:15px;
+}
+
+#particles {
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
 }
 </style>
 </head>
+
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>🌎 ExpiLingo</header>
 
@@ -75,10 +192,23 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <!-- SERVICIOS -->
 <section class="servicios">
 <h2>Servicios</h2>
+<hr>
 <p>✔ Tutorías personalizadas</p>
 <p>✔ Explicación de tareas paso a paso</p>
 <p>✔ Corrección de textos</p>
 <p>✔ Traducción inglés-español</p>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section>
+<h2>¿Cómo funciona?</h2>
+<hr>
+<div class="pasos">
+<div class="paso"><h3>1. Escríbenos</h3><p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p></div>
+<div class="paso"><h3>2. Revisamos tu tarea</h3><p>Analizamos el ejercicio o texto que necesitas entender.</p></div>
+<div class="paso"><h3>3. Te explicamos paso a paso</h3><p>No solo te damos la respuesta, te ayudamos a comprenderla.</p></div>
+<div class="paso"><h3>4. Tú lo completas</h3><p>Aprendes y terminas tu tarea con seguridad.</p></div>
+</div>
 </section>
 
 <!-- PRECIOS -->
@@ -89,51 +219,80 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 </section>
 
 <!-- CONTACTO -->
-<section id="contacto">
+<section>
 <h2>Contáctanos</h2>
 <hr>
 <div class="redes">
 <a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
 <a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
-<a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
-<a href="https://x.com/expilingo" target="_blank">🐦 X</a>
+<a href="#">📘 Facebook</a>
+<a href="#">🐦 X</a>
 </div>
 </section>
 
 <!-- QR -->
 <div id="qr-overlay">
-  <p>Escanea el código con Nequi y realiza el pago</p>
-
-  <img src="qr-nequi.png" alt="Código QR Nequi">
-
-  <p>Después de pagar, envíanos tu comprobante por WhatsApp 📩</p>
-
-  <a href="https://wa.me/573102270396" target="_blank">
-    <button class="btn-pay">Enviar comprobante</button>
-  </a>
-
-  <button onclick="closeQR()">Cerrar</button>
+<p>Escanea el código con Nequi</p>
+<img src="qr-nequi.png">
+<p>Después de pagar, envía tu comprobante 📩</p>
+<a href="https://wa.me/573102270396" target="_blank">
+<button class="btn-pay">Enviar comprobante</button>
+</a>
+<button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
 const precios = [
-{titulo:"30 min", precio:20000},
-{titulo:"1 hora", precio:30000},
-{titulo:"Básico", precio:15000},
-{titulo:"Estándar", precio:25000},
-{titulo:"Pro", precio:75000}
+{titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
+{titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
+{titulo:"Básico", precio:15000, descripcion:"3 explicaciones según tu necesidad"},
+{titulo:"Estándar", precio:25000, descripcion:"8 explicaciones según tu necesidad"},
+{titulo:"Pro", precio:100000, descripcion:"Ayudas ilimitadas por una semana", pro:true}
 ];
 
 const container = document.getElementById("precios-container");
+const minPrecio = Math.min(...precios.map(p => p.precio));
 
 precios.forEach(item=>{
   const card = document.createElement("div");
-  card.className="card";
+  card.className="card"+(item.pro?" pro":"");
+
   card.innerHTML = `
     <h3>${item.titulo}</h3>
-    <p class="precio">$${item.precio.toLocaleString()}</p>
+    <p class="precio">$${item.precio.toLocaleString()} COP</p>
+    <p class="descripcion">${item.descripcion}</p>
     <button class="btn-pay">Pagar con Nequi</button>
   `;
+
+  card.addEventListener("mouseenter", ()=>{
+    let cantidad = item.pro ? 12 : Math.round((item.precio/minPrecio)*5);
+
+    for(let i=0;i<cantidad;i++){
+      const part=document.createElement("span");
+      part.textContent=item.pro?(Math.random()>0.5?"👑":"💎"):"💵";
+      part.style.position="absolute";
+      part.style.left="50%";
+      part.style.top="50%";
+      part.style.transform="translate(-50%,-50%)";
+      part.style.fontSize="22px";
+
+      card.appendChild(part);
+
+      const ang=Math.random()*2*Math.PI;
+      const dist=80+Math.random()*40;
+
+      const x=Math.cos(ang)*dist;
+      const y=Math.sin(ang)*dist;
+
+      part.animate([
+        {transform:"translate(-50%,-50%)",opacity:1},
+        {transform:`translate(${x}px,${y}px)`,opacity:0}
+      ],{duration:600});
+
+      setTimeout(()=>part.remove(),600);
+    }
+  });
+
   container.appendChild(card);
 });
 
@@ -146,6 +305,28 @@ document.querySelectorAll('.btn-pay').forEach(btn=>{
 function closeQR(){
   document.getElementById('qr-overlay').style.display='none';
 }
+
+/* PARTÍCULAS */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let p=[];
+for(let i=0;i<50;i++){
+  p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height});
+}
+
+setInterval(()=>{
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  p.forEach(a=>{
+    ctx.fillRect(a.x,a.y,2,2);
+    a.y+=1;
+    if(a.y>canvas.height)a.y=0;
+  });
+},30);
 </script>
 
 </body>
