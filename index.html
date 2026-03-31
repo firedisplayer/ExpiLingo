@@ -15,21 +15,34 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 .paso { background:#1e293b; padding:20px; width:220px; border-radius:15px; transition:0.3s; }
 .paso:hover { transform:translateY(-8px); background:#38bdf8; color:black; }
 .precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.card { background:#1e293b; padding:20px; width:220px; border-radius:20px; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); position:relative; overflow:hidden; color:white; }
-.card:hover:not(.pro) { transform:translateY(-10px) scale(1.05); background:#22c55e; color:black; }
-.card.pro { background:#1f2a38; color:white; border:2px solid #fbbf24; box-shadow:0 5px 15px rgba(255,223,93,0.2); transition:all 0.5s ease; }
-.card.pro h3::after { content:" 👑"; position:relative; left:5px; font-size:20px; }
-.card.pro:hover { background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15); background-size:600% 600%; animation:shineGold 8s ease infinite; box-shadow:0 0 25px #fcd34d,0 0 50px #fbbf24,0 0 75px #fde68a; transform:translateY(-10px) scale(1.05); color:black; }
-@keyframes shineGold {0% {background-position:0% 50%;}50% {background-position:100% 50%;}100% {background-position:0% 50%;}}
-.precio { font-size:22px; font-weight:bold; margin:10px 0; position:relative; }
-.redes { display:flex; flex-direction:column; align-items:center; gap:15px; }
-.redes a { width:220px; padding:12px; background:#1e293b; border-radius:15px; text-decoration:none; color:white; font-size:18px; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
-.redes a:hover { transform:translateY(-5px) scale(1.05); background:#22c55e; color:black; }
-.btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; transition:0.3s; font-weight:bold; }
+.card { background:#1e293b; padding:20px; width:220px; border-radius:20px; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+.card:hover { transform:translateY(-10px) scale(1.05); background:#22c55e; color:black; }
+.precio { font-size:22px; font-weight:bold; margin:10px 0; }
+.btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold; }
 .btn-pay:hover { background:#16a34a; }
-#qr-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:1000; flex-direction:column; }
-#qr-overlay img { max-width:250px; margin:20px 0; border:5px solid white; border-radius:15px; }
-#qr-overlay button { padding:10px 20px; border:none; border-radius:10px; background:#fbbf24; color:black; font-weight:bold; cursor:pointer; }
+
+#qr-overlay {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+}
+
+#qr-overlay img {
+  max-width:250px;
+  margin:20px 0;
+  border:5px solid white;
+  border-radius:15px;
+}
+
+#qr-overlay button {
+  margin-top:10px;
+}
 </style>
 </head>
 <body>
@@ -38,82 +51,61 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 
 <section>
 <h1 class="slogan">No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar</h1>
-<p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
-</section>
-
-<section class="servicios">
-<h2>Servicios</h2>
-<p>✔ Tutorías personalizadas</p>
-<p>✔ Explicación de tareas paso a paso</p>
-<p>✔ Corrección de textos</p>
-<p>✔ Traducción inglés-español</p>
-</section>
-
-<section>
-<h2>¿Cómo funciona?</h2>
-<hr>
-<div class="pasos">
-<div class="paso"><h3>1. Escríbenos</h3><p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p></div>
-<div class="paso"><h3>2. Revisamos tu tarea</h3><p>Analizamos el ejercicio o texto que necesitas entender.</p></div>
-<div class="paso"><h3>3. Te explicamos paso a paso</h3><p>No solo te damos la respuesta, te ayudamos a comprenderla.</p></div>
-<div class="paso"><h3>4. Tú lo completas</h3><p>Aprendes y terminas tu tarea con seguridad.</p></div>
-</div>
+<p>Ayuda bilingüe para estudiantes.</p>
 </section>
 
 <section>
 <h2>Precios</h2>
 <hr>
-<p><strong>💬 Primera ayuda GRATIS (1 por persona)</strong></p>
 <div class="precios" id="precios-container"></div>
-</section>
-
-<section id="contacto">
-<h2>Contáctanos</h2>
-<hr>
-<div class="redes">
-<a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
-<a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
-<a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
-<a href="https://x.com/expilingo" target="_blank">🐦 X</a>
-</div>
 </section>
 
 <!-- Overlay QR -->
 <div id="qr-overlay">
-<p>Haz clic en el código o escanéalo con tu app Nequi</p>
-<img src="Sin título.png" alt="Código QR Nequi">
-<button onclick="closeQR()">Cerrar</button>
+  <p>Escanea el código con Nequi y realiza el pago</p>
+
+  <img src="qr-nequi.png" alt="Código QR Nequi">
+
+  <p>Después de pagar, envíanos tu comprobante por WhatsApp 📩</p>
+
+  <a href="https://wa.me/573102270396" target="_blank">
+    <button class="btn-pay">Enviar comprobante</button>
+  </a>
+
+  <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
-const precios=[
-{titulo:"30 min", precio:20000, descripcion:"Explicación rápida", pro:false},
-{titulo:"1 hora", precio:30000, descripcion:"Sesión completa", pro:false},
-{titulo:"Básico", precio:15000, descripcion:"3 ayudas", pro:false},
-{titulo:"Estándar", precio:25000, descripcion:"8 ayudas 🔥", pro:false},
-{titulo:"Pro", precio:75000, descripcion:"1 semana", pro:true},
+const precios = [
+{titulo:"30 min", precio:20000},
+{titulo:"1 hora", precio:30000},
+{titulo:"Básico", precio:15000},
+{titulo:"Estándar", precio:25000},
+{titulo:"Pro", precio:75000}
 ];
 
-const container=document.getElementById("precios-container");
+const container = document.getElementById("precios-container");
 
 precios.forEach(item=>{
-  const card=document.createElement("div");
-  card.className="card"+(item.pro?" pro":"");
-  card.innerHTML=`<h3>${item.titulo}</h3>
-  <p class="precio">$${item.precio.toLocaleString()}</p>
-  <p>${item.descripcion}</p>
-  <button class="btn-pay">Pagar con Nequi</button>`;
+  const card = document.createElement("div");
+  card.className="card";
+  card.innerHTML = `
+    <h3>${item.titulo}</h3>
+    <p class="precio">$${item.precio.toLocaleString()}</p>
+    <button class="btn-pay">Pagar con Nequi</button>
+  `;
   container.appendChild(card);
 });
 
-// Botones de pago
 document.querySelectorAll('.btn-pay').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.getElementById('qr-overlay').style.display='flex';
   });
 });
 
-function closeQR(){ document.getElementById('qr-overlay').style.display='none'; }
+function closeQR(){
+  document.getElementById('qr-overlay').style.display='none';
+}
 </script>
 
 </body>
