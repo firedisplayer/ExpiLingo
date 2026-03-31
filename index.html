@@ -5,26 +5,14 @@
 <title>ExpiLingo</title>
 
 <style>
-/* VIDEO DE FONDO */
 body {
   font-family: Arial;
   margin:0;
+  background: linear-gradient(135deg,#0a0f1f,#020617);
   color:white;
   text-align:center;
-  position:relative;
-  overflow-x:hidden;
-}
-#video-bg {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
 }
 
-/* HEADER */
 header {
   background:#111827;
   padding:20px;
@@ -33,22 +21,54 @@ header {
   color:#22c55e;
 }
 
-/* SECCIONES */
 section { padding:60px 20px; }
+
 h1 { font-size:40px; }
-hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
-.slogan span { color:#38bdf8; text-decoration:underline; }
 
-/* SERVICIOS */
-.servicios p { margin:8px; font-size:18px; }
+hr {
+  width:200px;
+  margin:10px auto 30px;
+  border:1px solid #22c55e;
+}
 
-/* PASOS */
-.pasos { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.paso { background:#1e293b; padding:20px; width:220px; border-radius:15px; transition:0.3s; }
-.paso:hover { transform:translateY(-8px); background:#38bdf8; color:black; }
+.slogan span {
+  color:#38bdf8;
+  text-decoration:underline;
+}
 
-/* PRECIOS */
-.precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+.servicios p {
+  margin:8px;
+  font-size:18px;
+}
+
+.pasos {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.paso {
+  background:#1e293b;
+  padding:20px;
+  width:220px;
+  border-radius:15px;
+  transition:0.3s;
+}
+
+.paso:hover {
+  transform:translateY(-8px);
+  background:#38bdf8;
+  color:black;
+}
+
+.precios {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
 .card {
   background:#1e293b;
   padding:20px;
@@ -60,6 +80,7 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   overflow:hidden;
   color:white;
 }
+
 .card:hover:not(.pro) {
   transform:translateY(-10px) scale(1.05);
   background:#22c55e;
@@ -71,7 +92,11 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   background:#1f2a38;
   border:2px solid #fbbf24;
 }
-.card.pro h3::after { content:" 👑"; }
+
+.card.pro h3::after {
+  content:" 👑";
+}
+
 .card.pro:hover {
   background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15);
   background-size:600% 600%;
@@ -80,13 +105,30 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   transform:translateY(-10px) scale(1.05);
   color:black;
 }
-@keyframes shineGold {0% {background-position:0% 50%;}50% {background-position:100% 50%;}100% {background-position:0% 50%;}}
 
-.precio { font-size:22px; font-weight:bold; }
-.descripcion { font-size:14px; margin:10px 0; }
+@keyframes shineGold {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
 
-/* REDES */
-.redes { display:flex; flex-direction:column; gap:15px; align-items:center; }
+.precio {
+  font-size:22px;
+  font-weight:bold;
+}
+
+.descripcion {
+  font-size:14px;
+  margin:10px 0;
+}
+
+.redes {
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  align-items:center;
+}
+
 .redes a {
   width:220px;
   padding:12px;
@@ -95,12 +137,22 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   text-decoration:none;
   color:white;
 }
-.redes a:hover { background:#22c55e; color:black; }
 
-/* BOTONES */
-.btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; }
+.redes a:hover {
+  background:#22c55e;
+  color:black;
+}
 
-/* QR */
+.btn-pay {
+  margin-top:10px;
+  padding:10px 15px;
+  background:#22c55e;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
 #qr-overlay {
   display:none;
   position:fixed;
@@ -111,19 +163,22 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   align-items:center;
   flex-direction:column;
 }
-#qr-overlay img { max-width:250px; margin:20px 0; }
 
-/* PARTICULAS */
-#particles { position:fixed; width:100%; height:100%; z-index:-1; }
+#qr-overlay img {
+  max-width:250px;
+  margin:20px 0;
+}
+
+#particles {
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
 </style>
 </head>
 
 <body>
-
-<!-- VIDEO DE FONDO -->
-<video id="video-bg" autoplay muted loop>
-  <source src="Fondo.mp4" type="video/mp4">
-</video>
 
 <canvas id="particles"></canvas>
 
@@ -211,6 +266,7 @@ precios.forEach(item=>{
 
   card.addEventListener("mouseenter", ()=>{
     let cantidad = item.pro ? 12 : Math.round((item.precio/minPrecio)*5);
+
     for(let i=0;i<cantidad;i++){
       const part=document.createElement("span");
       part.textContent=item.pro?(Math.random()>0.5?"👑":"💎"):"💵";
@@ -219,10 +275,12 @@ precios.forEach(item=>{
       part.style.top="50%";
       part.style.transform="translate(-50%,-50%)";
       part.style.fontSize="22px";
+
       card.appendChild(part);
 
       const ang=Math.random()*2*Math.PI;
       const dist=80+Math.random()*40;
+
       const x=Math.cos(ang)*dist;
       const y=Math.sin(ang)*dist;
 
@@ -244,7 +302,9 @@ document.querySelectorAll('.btn-pay').forEach(btn=>{
   });
 });
 
-function closeQR(){ document.getElementById('qr-overlay').style.display='none'; }
+function closeQR(){
+  document.getElementById('qr-overlay').style.display='none';
+}
 
 /* PARTÍCULAS */
 const canvas=document.getElementById("particles");
