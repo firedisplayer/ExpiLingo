@@ -11,14 +11,36 @@ h1 { font-size:40px; }
 hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 .slogan span { color:#38bdf8; text-decoration:underline; }
 .servicios p { margin:8px; font-size:18px; }
-.pasos { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.paso { background:#1e293b; padding:20px; width:220px; border-radius:15px; transition:0.3s; }
-.paso:hover { transform:translateY(-8px); background:#38bdf8; color:black; }
+
 .precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 .card { background:#1e293b; padding:20px; width:220px; border-radius:20px; transition:all 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
 .card:hover { transform:translateY(-10px) scale(1.05); background:#22c55e; color:black; }
+
 .precio { font-size:22px; font-weight:bold; margin:10px 0; }
-.btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold; }
+
+.redes { display:flex; flex-direction:column; align-items:center; gap:15px; }
+.redes a {
+  width:220px;
+  padding:12px;
+  background:#1e293b;
+  border-radius:15px;
+  text-decoration:none;
+  color:white;
+  font-size:18px;
+  transition:0.3s;
+}
+.redes a:hover { background:#22c55e; color:black; transform:scale(1.05); }
+
+.btn-pay {
+  margin-top:10px;
+  padding:10px 15px;
+  background:#22c55e;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
 .btn-pay:hover { background:#16a34a; }
 
 #qr-overlay {
@@ -39,10 +61,6 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   border:5px solid white;
   border-radius:15px;
 }
-
-#qr-overlay button {
-  margin-top:10px;
-}
 </style>
 </head>
 <body>
@@ -51,16 +69,38 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 
 <section>
 <h1 class="slogan">No te enseñamos qué pensar. Te enseñamos <span>cómo</span> pensar</h1>
-<p>Ayuda bilingüe para estudiantes.</p>
+<p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
 </section>
 
+<!-- SERVICIOS -->
+<section class="servicios">
+<h2>Servicios</h2>
+<p>✔ Tutorías personalizadas</p>
+<p>✔ Explicación de tareas paso a paso</p>
+<p>✔ Corrección de textos</p>
+<p>✔ Traducción inglés-español</p>
+</section>
+
+<!-- PRECIOS -->
 <section>
 <h2>Precios</h2>
 <hr>
 <div class="precios" id="precios-container"></div>
 </section>
 
-<!-- Overlay QR -->
+<!-- CONTACTO -->
+<section id="contacto">
+<h2>Contáctanos</h2>
+<hr>
+<div class="redes">
+<a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
+<a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
+<a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
+<a href="https://x.com/expilingo" target="_blank">🐦 X</a>
+</div>
+</section>
+
+<!-- QR -->
 <div id="qr-overlay">
   <p>Escanea el código con Nequi y realiza el pago</p>
 
