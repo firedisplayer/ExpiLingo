@@ -3,19 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>ExpiLingo</title>
+
+<!-- Fuente Bungee -->
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
 <style>
-/* ===================== FONDO ===================== */
+/* Estilos generales */
 body {
-  font-family: Arial;
   margin:0;
+  font-family:'Bungee', Arial, sans-serif;
   color:white;
   text-align:center;
   overflow-x:hidden;
 }
 
+header {
+  background:#111827;
+  padding:20px;
+  font-size:30px;
+  font-weight:bold;
+  color:#22c55e;
+}
+
 /* Video de fondo */
-#video-bg {
-  position: fixed;
+#bg-video {
+  position:fixed;
   top:0;
   left:0;
   width:100%;
@@ -24,48 +36,31 @@ body {
   z-index:-2;
 }
 
-/* Overlay oscuro */
-#video-overlay {
-  position: fixed;
+#bg-overlay {
+  position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5); /* Oscurece el video */
   z-index:-1;
 }
 
-/* ===================== HEADER ===================== */
-header {
-  background:#111827;
-  padding:20px;
-  font-size:30px;
-  font-weight:bold;
-  color:#22c55e;
-  position:relative;
-  z-index:1;
-}
-
-/* ===================== SECCIONES ===================== */
-section { padding:60px 20px; position:relative; z-index:1; }
+section { padding:60px 20px; }
 h1 { font-size:40px; }
 hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
+
 .slogan span { color:#38bdf8; text-decoration:underline; }
 
+/* Servicios */
 .servicios p { margin:8px; font-size:18px; }
 
-/* PASOS */
+/* Pasos */
 .pasos { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.paso {
-  background:#1e293b;
-  padding:20px;
-  width:220px;
-  border-radius:15px;
-  transition:0.3s;
-}
+.paso { background:#1e293b; padding:20px; width:220px; border-radius:15px; transition:0.3s; }
 .paso:hover { transform:translateY(-8px); background:#38bdf8; color:black; }
 
-/* PRECIOS */
+/* Precios */
 .precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 .card {
   background:#1e293b;
@@ -83,12 +78,9 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 /* PRO */
 .card.pro {
   background:#1f2a38;
-  color:white;
   border:2px solid #fbbf24;
-  box-shadow:0 5px 15px rgba(255,223,93,0.2);
-  transition:all 0.5s ease;
 }
-.card.pro h3::after { content:" 👑"; position:relative; left:5px; font-size:20px; }
+.card.pro h3::after { content:" 👑"; }
 .card.pro:hover {
   background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15);
   background-size:600% 600%;
@@ -102,8 +94,8 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 .precio { font-size:22px; font-weight:bold; margin:10px 0; position:relative; }
 .descripcion { font-size:14px; margin:10px 0; }
 
-/* REDES */
-.redes { display:flex; flex-direction:column; align-items:center; gap:15px; position:relative; z-index:1; }
+/* Redes */
+.redes { display:flex; flex-direction:column; align-items:center; gap:15px; }
 .redes a {
   width:220px;
   padding:12px;
@@ -112,23 +104,21 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   text-decoration:none;
   color:white;
   font-size:18px;
-  transition:all 0.3s ease;
   box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
 }
 .redes a:hover { transform:translateY(-5px) scale(1.05); background:#22c55e; color:black; }
 
-/* BOTONES */
+/* Botones de pago */
 .btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; transition:0.3s; font-weight:bold; }
 .btn-pay:hover { background:#16a34a; }
 
-/* QR OVERLAY */
+/* Overlay QR */
 #qr-overlay {
   display:none;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:rgba(0,0,0,0.85);
   justify-content:center;
   align-items:center;
@@ -136,21 +126,22 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   flex-direction:column;
 }
 #qr-overlay img { max-width:250px; margin:20px 0; border:5px solid white; border-radius:15px; }
-#qr-overlay button { padding:10px 20px; border:none; border-radius:10px; background:#fbbf24; color:black; font-weight:bold; cursor:pointer; }
 
-/* ===================== PARTÍCULAS ===================== */
-#particles { position:fixed; width:100%; height:100%; z-index:-1; }
+/* Adaptación móvil */
+@media(max-width:600px){
+  h1 { font-size:28px; }
+  .paso, .card, .redes a { width:90%; }
+}
 </style>
 </head>
+
 <body>
 
-<!-- VIDEO DE FONDO -->
-<video id="video-bg" autoplay muted loop>
+<!-- Video de fondo -->
+<video id="bg-video" autoplay muted loop playsinline>
   <source src="Fondo.mp4" type="video/mp4">
 </video>
-<div id="video-overlay"></div>
-
-<canvas id="particles"></canvas>
+<div id="bg-overlay"></div>
 
 <header>🌎 ExpiLingo</header>
 
@@ -159,7 +150,7 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
 </section>
 
-<!-- SERVICIOS -->
+<!-- Servicios -->
 <section class="servicios">
 <h2>Servicios</h2>
 <hr>
@@ -169,7 +160,7 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <p>✔ Traducción inglés-español</p>
 </section>
 
-<!-- COMO FUNCIONA -->
+<!-- Cómo funciona -->
 <section>
 <h2>¿Cómo funciona?</h2>
 <hr>
@@ -181,7 +172,7 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 </div>
 </section>
 
-<!-- PRECIOS -->
+<!-- Precios -->
 <section>
 <h2>Precios</h2>
 <hr>
@@ -189,7 +180,7 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <div class="precios" id="precios-container"></div>
 </section>
 
-<!-- CONTACTO -->
+<!-- Contacto -->
 <section id="contacto">
 <h2>Contáctanos</h2>
 <hr>
@@ -201,22 +192,21 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 </div>
 </section>
 
-<!-- QR -->
+<!-- Overlay QR -->
 <div id="qr-overlay">
 <p>Haz clic en el código o escanéalo con tu app Nequi</p>
 <img src="qr-nequi.png" alt="Código QR Nequi">
-<p>Después de pagar, envía tu comprobante 📩</p>
-<a href="https://wa.me/573102270396" target="_blank"><button class="btn-pay">Enviar comprobante</button></a>
 <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
+/* Tarjetas de precios */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
 {titulo:"Básico", precio:15000, descripcion:"3 explicaciones según tu necesidad"},
 {titulo:"Estándar", precio:25000, descripcion:"8 explicaciones según tu necesidad"},
-{titulo:"Pro", precio:100000, descripcion:"Ayudas ilimitadas por una semana", pro:true},
+{titulo:"Pro", precio:100000, descripcion:"Ayudas ilimitadas por una semana", pro:true}
 ];
 
 const container=document.getElementById("precios-container");
@@ -229,10 +219,10 @@ precios.forEach(item=>{
   <p class="precio">$${item.precio.toLocaleString()} COP</p>
   <p class="descripcion">${item.descripcion}</p>
   <button class="btn-pay">Pagar con Nequi</button>`;
-
-  // Efecto billetes/coronas
+  
+  /* Efecto de explosión de billetes/coronas */
   card.addEventListener("mouseenter", ()=>{
-    let cantidad = item.pro?12:Math.round((item.precio/minPrecio)*5);
+    let cantidad=item.pro?12:Math.round((item.precio/minPrecio)*5);
     for(let i=0;i<cantidad;i++){
       const part=document.createElement("span");
       part.textContent=item.pro?(Math.random()>0.5?"👑":"💎"):"💵";
@@ -241,28 +231,21 @@ precios.forEach(item=>{
       part.style.top="50%";
       part.style.transform="translate(-50%,-50%)";
       part.style.fontSize="22px";
-
       card.appendChild(part);
-
       const ang=Math.random()*2*Math.PI;
       const dist=80+Math.random()*40;
-
       const x=Math.cos(ang)*dist;
       const y=Math.sin(ang)*dist;
-
-      part.animate([
-        {transform:"translate(-50%,-50%)",opacity:1},
-        {transform:`translate(${x}px,${y}px)`,opacity:0}
-      ],{duration:600});
-
+      part.animate([{transform:"translate(-50%,-50%)",opacity:1},
+                    {transform:`translate(${x}px,${y}px)`,opacity:0}],{duration:600});
       setTimeout(()=>part.remove(),600);
     }
   });
-
+  
   container.appendChild(card);
 });
 
-// Botones QR
+/* Botones de pago */
 document.querySelectorAll('.btn-pay').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.getElementById('qr-overlay').style.display='flex';
@@ -270,23 +253,7 @@ document.querySelectorAll('.btn-pay').forEach(btn=>{
 });
 
 function closeQR(){ document.getElementById('qr-overlay').style.display='none'; }
-
-/* Partículas */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-let p=[];
-for(let i=0;i<50;i++){ p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height}); }
-setInterval(()=>{
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="white";
-  p.forEach(a=>{
-    ctx.fillRect(a.x,a.y,2,2);
-    a.y+=1;
-    if(a.y>canvas.height) a.y=0;
-  });
-},30);
 </script>
+
 </body>
 </html>
