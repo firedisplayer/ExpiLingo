@@ -7,11 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
 <style>
-
-/* FUENTE */
 *{font-family:'Bungee', cursive, Arial, sans-serif;}
 
-/* VIDEO */
 #bg-video{
   position:fixed; top:0; left:0;
   width:100%; height:100%;
@@ -25,7 +22,6 @@
   z-index:-1;
 }
 
-/* GENERAL */
 body{margin:0;color:white;text-align:center;}
 header{background:#111827;padding:20px;font-size:30px;color:#22c55e;}
 section{padding:60px 20px;}
@@ -34,7 +30,6 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .slogan span{color:#38bdf8;text-decoration:underline;}
 .servicios p{margin:8px;font-size:18px;}
 
-/* PASOS */
 .pasos{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
 .paso{
   background:#1e293b;
@@ -45,17 +40,9 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   transform:translateY(40px);
   transition:all 0.6s ease;
 }
-.paso.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-.paso:hover{
-  transform:translateY(-8px) scale(1.05);
-  background:#38bdf8;
-  color:black;
-}
+.paso.visible{opacity:1;transform:translateY(0);}
+.paso:hover{transform:translateY(-8px) scale(1.05);background:#38bdf8;color:black;}
 
-/* PRECIOS */
 .precios{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
 .card{
   background:#1e293b;
@@ -73,7 +60,6 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   color:black;
 }
 
-/* PRO */
 .card.pro{border:2px solid #fbbf24;}
 .card.pro h3::after{content:" 👑";}
 .card.pro:hover{
@@ -92,7 +78,6 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .precio{font-size:22px;font-weight:bold;margin:10px 0;}
 .descripcion{font-size:14px;margin:10px 0;}
 
-/* BOTÓN */
 .btn-pay{
   margin-top:10px;
   padding:10px 15px;
@@ -104,7 +89,6 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 }
 .btn-pay:hover{background:#16a34a;}
 
-/* REDES */
 .redes{display:flex;flex-direction:column;gap:15px;align-items:center;}
 .redes a{
   width:220px;
@@ -116,11 +100,9 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 }
 .redes a:hover{background:#22c55e;color:black;}
 
-/* 🔥 OVERLAY ANIMADO */
 #qr-overlay{
   display:flex;
   position:fixed;
-  top:0; left:0;
   width:100%; height:100%;
   background:rgba(0,0,0,0.9);
   justify-content:center;
@@ -150,12 +132,10 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   font-size:22px;
 }
 
-/* RESPONSIVE */
 @media(max-width:600px){
   h1{font-size:28px;}
   .card,.paso,.redes a{width:90%;}
 }
-
 </style>
 </head>
 
@@ -210,20 +190,20 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 </div>
 </section>
 
-<!-- QR -->
 <div id="qr-overlay">
   <p>📱 Escanea con Nequi</p>
   <img src="qr-nequi.png">
   <p>💡 O envía el pago al número:</p>
   <p><strong>0092362628</strong></p>
   <p>📩 Después de pagar, envía tu comprobante:</p>
-  <a href="https://wa.me/573102270396?text=Hola,%20ya%20realicé%20un%20pago%20por%20ExpiLingo" target="_blank">
-    <button class="btn-pay">Enviar comprobante</button>
-  </a>
+  <button class="btn-pay" onclick="enviarComprobante()">Enviar comprobante</button>
   <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
+
+/* MENSAJE DINÁMICO */
+let mensajeWhatsApp = "";
 
 /* ANIMACIÓN PASOS */
 const pasos=document.querySelectorAll(".paso");
@@ -237,7 +217,7 @@ function mostrarPasos(){
 window.addEventListener("scroll",mostrarPasos);
 window.addEventListener("load",mostrarPasos);
 
-/* PRECIOS + FIX BOTONES */
+/* PRECIOS */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
@@ -252,47 +232,27 @@ const minPrecio=Math.min(...precios.map(p=>p.precio));
 precios.forEach(item=>{
   const card=document.createElement("div");
   card.className="card"+(item.pro?" pro":"");
+
   card.innerHTML=`
   <h3>${item.titulo}</h3>
   <p class="precio">$${item.precio.toLocaleString()} COP</p>
   <p class="descripcion">${item.descripcion}</p>
   <button class="btn-pay">Pagar con Nequi</button>`;
 
-  /* 🔥 BOTÓN FUNCIONANDO */
+  /* GUARDAR PLAN */
   card.querySelector('.btn-pay').addEventListener('click', ()=>{
+    mensajeWhatsApp = `Hola, ya realicé un pago por ExpiLingo para el plan ${item.titulo} de ${item.precio.toLocaleString()} COP`;
     document.getElementById('qr-overlay').classList.add('active');
-  });
-
-  /* EFECTO */
-  card.addEventListener("mouseenter", ()=>{
-    let cantidad=item.pro?12:Math.round((item.precio/minPrecio)*5);
-    for(let i=0;i<cantidad;i++){
-      const part=document.createElement("span");
-      part.textContent=item.pro?(Math.random()>0.5?"👑":"💎"):"💵";
-      part.style.position="absolute";
-      part.style.left="50%";
-      part.style.top="50%";
-      part.style.transform="translate(-50%,-50%)";
-      part.style.fontSize="22px";
-
-      card.appendChild(part);
-
-      const ang=Math.random()*2*Math.PI;
-      const dist=80+Math.random()*40;
-      const x=Math.cos(ang)*dist;
-      const y=Math.sin(ang)*dist;
-
-      part.animate([
-        {transform:"translate(-50%,-50%)",opacity:1},
-        {transform:`translate(${x}px,${y}px)`,opacity:0}
-      ],{duration:600});
-
-      setTimeout(()=>part.remove(),600);
-    }
   });
 
   container.appendChild(card);
 });
+
+/* WHATSAPP */
+function enviarComprobante(){
+  const url = `https://wa.me/573102270396?text=${encodeURIComponent(mensajeWhatsApp)}`;
+  window.open(url, '_blank');
+}
 
 /* CERRAR */
 function closeQR(){
