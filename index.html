@@ -8,61 +8,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
 <style>
-/* Estilos generales */
-body {
-  margin:0;
-  font-family:'Bungee', Arial, sans-serif;
-  color:white;
-  text-align:center;
-  overflow-x:hidden;
+
+/* FUENTE GLOBAL */
+*{
+  font-family:'Bungee', cursive, Arial, sans-serif;
 }
 
-header {
-  background:#111827;
-  padding:20px;
-  font-size:30px;
-  font-weight:bold;
-  color:#22c55e;
-}
-
-/* Video de fondo */
-#bg-video {
+/* FONDO VIDEO */
+#bg-video{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   object-fit:cover;
   z-index:-2;
 }
-
-#bg-overlay {
+#bg-overlay{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5); /* Oscurece el video */
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.5);
   z-index:-1;
 }
 
-section { padding:60px 20px; }
-h1 { font-size:40px; }
-hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
+/* GENERAL */
+body{margin:0;color:white;text-align:center;}
+header{background:#111827;padding:20px;font-size:30px;color:#22c55e;}
+section{padding:60px 20px;}
+h1{font-size:40px;}
+hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
+.slogan span{color:#38bdf8;text-decoration:underline;}
 
-.slogan span { color:#38bdf8; text-decoration:underline; }
+.servicios p{margin:8px;font-size:18px;}
 
-/* Servicios */
-.servicios p { margin:8px; font-size:18px; }
+/* PASOS */
+.pasos{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.paso{background:#1e293b;padding:20px;width:220px;border-radius:15px;transition:0.3s;}
+.paso:hover{transform:translateY(-8px);background:#38bdf8;color:black;}
 
-/* Pasos */
-.pasos { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.paso { background:#1e293b; padding:20px; width:220px; border-radius:15px; transition:0.3s; }
-.paso:hover { transform:translateY(-8px); background:#38bdf8; color:black; }
-
-/* Precios */
-.precios { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
-.card {
+/* PRECIOS */
+.precios{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.card{
   background:#1e293b;
   padding:20px;
   width:220px;
@@ -71,75 +55,89 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
   box-shadow:0 5px 15px rgba(0,0,0,0.3);
   position:relative;
   overflow:hidden;
-  color:white;
 }
-.card:hover:not(.pro) { transform:translateY(-10px) scale(1.05); background:#22c55e; color:black; }
+.card:hover:not(.pro){transform:translateY(-10px) scale(1.05);background:#22c55e;color:black;}
 
 /* PRO */
-.card.pro {
-  background:#1f2a38;
-  border:2px solid #fbbf24;
-}
-.card.pro h3::after { content:" 👑"; }
-.card.pro:hover {
+.card.pro{border:2px solid #fbbf24;}
+.card.pro h3::after{content:" 👑";}
+.card.pro:hover{
   background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15);
   background-size:600% 600%;
   animation:shineGold 8s ease infinite;
-  box-shadow:0 0 25px #fcd34d,0 0 50px #fbbf24,0 0 75px #fde68a;
   transform:translateY(-10px) scale(1.05);
   color:black;
 }
-@keyframes shineGold {0% {background-position:0% 50%;}50% {background-position:100% 50%;}100% {background-position:0% 50%;}}
+@keyframes shineGold{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-.precio { font-size:22px; font-weight:bold; margin:10px 0; position:relative; }
-.descripcion { font-size:14px; margin:10px 0; }
+.precio{font-size:22px;font-weight:bold;margin:10px 0;}
+.descripcion{font-size:14px;margin:10px 0;}
 
-/* Redes */
-.redes { display:flex; flex-direction:column; align-items:center; gap:15px; }
-.redes a {
+/* BOTONES */
+.btn-pay{
+  margin-top:10px;
+  padding:10px 15px;
+  background:#22c55e;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.btn-pay:hover{background:#16a34a;}
+
+/* REDES */
+.redes{display:flex;flex-direction:column;gap:15px;align-items:center;}
+.redes a{
   width:220px;
   padding:12px;
   background:#1e293b;
   border-radius:15px;
   text-decoration:none;
   color:white;
-  font-size:18px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
-  transition:all 0.3s ease;
 }
-.redes a:hover { transform:translateY(-5px) scale(1.05); background:#22c55e; color:black; }
+.redes a:hover{background:#22c55e;color:black;}
 
-/* Botones de pago */
-.btn-pay { margin-top:10px; padding:10px 15px; background:#22c55e; color:white; border:none; border-radius:10px; cursor:pointer; transition:0.3s; font-weight:bold; }
-.btn-pay:hover { background:#16a34a; }
-
-/* Overlay QR */
-#qr-overlay {
+/* OVERLAY QR */
+#qr-overlay{
   display:none;
   position:fixed;
-  top:0; left:0;
   width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
+  top:0; left:0;
+  background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
-  z-index:1000;
   flex-direction:column;
+  z-index:1000;
 }
-#qr-overlay img { max-width:250px; margin:20px 0; border:5px solid white; border-radius:15px; }
+#qr-overlay img{
+  max-width:250px;
+  margin:20px 0;
+  border:5px solid white;
+  border-radius:15px;
+}
+#qr-overlay strong{
+  color:#22c55e;
+  font-size:22px;
+}
 
-/* Adaptación móvil */
+/* RESPONSIVE */
 @media(max-width:600px){
-  h1 { font-size:28px; }
-  .paso, .card, .redes a { width:90%; }
+  h1{font-size:28px;}
+  .card,.paso,.redes a{width:90%;}
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- Video de fondo -->
+<!-- VIDEO -->
 <video id="bg-video" autoplay muted loop playsinline>
-  <source src="Fondo.mp4" type="video/mp4">
+<source src="Fondo.mp4" type="video/mp4">
 </video>
 <div id="bg-overlay"></div>
 
@@ -150,7 +148,6 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <p>Ayuda bilingüe para estudiantes. Aprende inglés y español de verdad.</p>
 </section>
 
-<!-- Servicios -->
 <section class="servicios">
 <h2>Servicios</h2>
 <hr>
@@ -160,47 +157,52 @@ hr { width:200px; margin:10px auto 30px; border:1px solid #22c55e; }
 <p>✔ Traducción inglés-español</p>
 </section>
 
-<!-- Cómo funciona -->
 <section>
 <h2>¿Cómo funciona?</h2>
 <hr>
 <div class="pasos">
-<div class="paso"><h3>1. Escríbenos</h3><p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p></div>
-<div class="paso"><h3>2. Revisamos tu tarea</h3><p>Analizamos el ejercicio o texto que necesitas entender.</p></div>
-<div class="paso"><h3>3. Te explicamos paso a paso</h3><p>No solo te damos la respuesta, te ayudamos a comprenderla.</p></div>
-<div class="paso"><h3>4. Tú lo completas</h3><p>Aprendes y terminas tu tarea con seguridad.</p></div>
+<div class="paso"><h3>1</h3><p>Escríbenos</p></div>
+<div class="paso"><h3>2</h3><p>Revisamos tu tarea</p></div>
+<div class="paso"><h3>3</h3><p>Te explicamos</p></div>
+<div class="paso"><h3>4</h3><p>Tú lo completas</p></div>
 </div>
 </section>
 
-<!-- Precios -->
 <section>
 <h2>Precios</h2>
 <hr>
-<p><strong>💬 Primera ayuda GRATIS (1 por persona)</strong></p>
 <div class="precios" id="precios-container"></div>
 </section>
 
-<!-- Contacto -->
-<section id="contacto">
+<section>
 <h2>Contáctanos</h2>
 <hr>
 <div class="redes">
-<a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
-<a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
-<a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
-<a href="https://x.com/expilingo" target="_blank">🐦 X</a>
+<a href="https://instagram.com/expilingo" target="_blank">Instagram</a>
+<a href="https://wa.me/573102270396" target="_blank">WhatsApp</a>
 </div>
 </section>
 
-<!-- Overlay QR -->
+<!-- QR MEJORADO -->
 <div id="qr-overlay">
-<p>Haz clic en el código o escanéalo con tu app Nequi</p>
-<img src="qr-nequi.png" alt="Código QR Nequi">
-<button onclick="closeQR()">Cerrar</button>
+  <p>📱 Escanea con Nequi</p>
+
+  <!-- TU QR INTACTO -->
+  <img src="qr-nequi.png">
+
+  <p>💡 O envía el pago al número:</p>
+  <p><strong>0092362628</strong></p>
+
+  <p>📩 Después de pagar, envía tu comprobante:</p>
+
+  <a href="https://wa.me/573102270396?text=Hola,%20ya%20realicé%20un%20pago%20por%20ExpiLingo" target="_blank">
+    <button class="btn-pay">Enviar comprobante</button>
+  </a>
+
+  <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
-/* Tarjetas de precios */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
@@ -215,12 +217,12 @@ const minPrecio=Math.min(...precios.map(p=>p.precio));
 precios.forEach(item=>{
   const card=document.createElement("div");
   card.className="card"+(item.pro?" pro":"");
-  card.innerHTML=`<h3>${item.titulo}</h3>
+  card.innerHTML=`
+  <h3>${item.titulo}</h3>
   <p class="precio">$${item.precio.toLocaleString()} COP</p>
   <p class="descripcion">${item.descripcion}</p>
   <button class="btn-pay">Pagar con Nequi</button>`;
-  
-  /* Efecto de explosión de billetes/coronas */
+
   card.addEventListener("mouseenter", ()=>{
     let cantidad=item.pro?12:Math.round((item.precio/minPrecio)*5);
     for(let i=0;i<cantidad;i++){
@@ -231,28 +233,36 @@ precios.forEach(item=>{
       part.style.top="50%";
       part.style.transform="translate(-50%,-50%)";
       part.style.fontSize="22px";
+
       card.appendChild(part);
+
       const ang=Math.random()*2*Math.PI;
       const dist=80+Math.random()*40;
       const x=Math.cos(ang)*dist;
       const y=Math.sin(ang)*dist;
-      part.animate([{transform:"translate(-50%,-50%)",opacity:1},
-                    {transform:`translate(${x}px,${y}px)`,opacity:0}],{duration:600});
+
+      part.animate([
+        {transform:"translate(-50%,-50%)",opacity:1},
+        {transform:`translate(${x}px,${y}px)`,opacity:0}
+      ],{duration:600});
+
       setTimeout(()=>part.remove(),600);
     }
   });
-  
+
   container.appendChild(card);
 });
 
-/* Botones de pago */
+/* ABRIR QR */
 document.querySelectorAll('.btn-pay').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.getElementById('qr-overlay').style.display='flex';
   });
 });
 
-function closeQR(){ document.getElementById('qr-overlay').style.display='none'; }
+function closeQR(){
+  document.getElementById('qr-overlay').style.display='none';
+}
 </script>
 
 </body>
