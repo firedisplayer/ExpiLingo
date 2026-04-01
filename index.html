@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>ExpiLingo</title>
 
-<!-- Fuente Bungee -->
 <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
 <style>
@@ -14,7 +13,7 @@
   font-family:'Bungee', cursive, Arial, sans-serif;
 }
 
-/* FONDO VIDEO */
+/* VIDEO */
 #bg-video{
   position:fixed;
   top:0; left:0;
@@ -41,8 +40,28 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 
 /* PASOS */
 .pasos{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.paso{background:#1e293b;padding:20px;width:220px;border-radius:15px;transition:0.3s;}
-.paso:hover{transform:translateY(-8px);background:#38bdf8;color:black;}
+
+.paso{
+  background:#1e293b;
+  padding:20px;
+  width:220px;
+  border-radius:15px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.6s ease;
+}
+
+/* ANIMACIÓN */
+.paso.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.paso:hover{
+  transform:translateY(-8px) scale(1.05);
+  background:#38bdf8;
+  color:black;
+}
 
 /* PRECIOS */
 .precios{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
@@ -56,7 +75,11 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   position:relative;
   overflow:hidden;
 }
-.card:hover:not(.pro){transform:translateY(-10px) scale(1.05);background:#22c55e;color:black;}
+.card:hover:not(.pro){
+  transform:translateY(-10px) scale(1.05);
+  background:#22c55e;
+  color:black;
+}
 
 /* PRO */
 .card.pro{border:2px solid #fbbf24;}
@@ -77,7 +100,7 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .precio{font-size:22px;font-weight:bold;margin:10px 0;}
 .descripcion{font-size:14px;margin:10px 0;}
 
-/* BOTONES */
+/* BOTÓN */
 .btn-pay{
   margin-top:10px;
   padding:10px 15px;
@@ -101,12 +124,11 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 }
 .redes a:hover{background:#22c55e;color:black;}
 
-/* OVERLAY QR */
+/* QR */
 #qr-overlay{
   display:none;
   position:fixed;
   width:100%; height:100%;
-  top:0; left:0;
   background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
@@ -135,7 +157,6 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 
 <body>
 
-<!-- VIDEO -->
 <video id="bg-video" autoplay muted loop playsinline>
 <source src="Fondo.mp4" type="video/mp4">
 </video>
@@ -161,10 +182,10 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 <h2>¿Cómo funciona?</h2>
 <hr>
 <div class="pasos">
-<div class="paso"><h3>1</h3><p>Escríbenos</p></div>
-<div class="paso"><h3>2</h3><p>Revisamos tu tarea</p></div>
-<div class="paso"><h3>3</h3><p>Te explicamos</p></div>
-<div class="paso"><h3>4</h3><p>Tú lo completas</p></div>
+<div class="paso"><h3>1. Escríbenos</h3><p>Contáctanos por WhatsApp o redes y dinos qué necesitas.</p></div>
+<div class="paso"><h3>2. Revisamos tu tarea</h3><p>Analizamos el ejercicio o texto que necesitas entender.</p></div>
+<div class="paso"><h3>3. Te explicamos paso a paso</h3><p>No solo te damos la respuesta, te ayudamos a comprenderla.</p></div>
+<div class="paso"><h3>4. Tú lo completas</h3><p>Aprendes y terminas tu tarea con seguridad.</p></div>
 </div>
 </section>
 
@@ -178,31 +199,43 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 <h2>Contáctanos</h2>
 <hr>
 <div class="redes">
-<a href="https://instagram.com/expilingo" target="_blank">Instagram</a>
-<a href="https://wa.me/573102270396" target="_blank">WhatsApp</a>
+<a href="https://instagram.com/expilingo" target="_blank">📸 Instagram</a>
+<a href="https://wa.me/573102270396" target="_blank">💬 WhatsApp</a>
+<a href="https://facebook.com/expilingo" target="_blank">📘 Facebook</a>
+<a href="https://x.com/expilingo" target="_blank">🐦 X</a>
 </div>
 </section>
 
-<!-- QR MEJORADO -->
 <div id="qr-overlay">
   <p>📱 Escanea con Nequi</p>
-
-  <!-- TU QR INTACTO -->
   <img src="qr-nequi.png">
-
   <p>💡 O envía el pago al número:</p>
   <p><strong>0092362628</strong></p>
-
   <p>📩 Después de pagar, envía tu comprobante:</p>
-
   <a href="https://wa.me/573102270396?text=Hola,%20ya%20realicé%20un%20pago%20por%20ExpiLingo" target="_blank">
     <button class="btn-pay">Enviar comprobante</button>
   </a>
-
   <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
+
+/* ANIMACIÓN SCROLL PASOS */
+const pasos=document.querySelectorAll(".paso");
+
+function mostrarPasos(){
+  pasos.forEach(p=>{
+    const top=p.getBoundingClientRect().top;
+    if(top<window.innerHeight-50){
+      p.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll",mostrarPasos);
+window.addEventListener("load",mostrarPasos);
+
+/* PRECIOS */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
@@ -253,7 +286,7 @@ precios.forEach(item=>{
   container.appendChild(card);
 });
 
-/* ABRIR QR */
+/* QR */
 document.querySelectorAll('.btn-pay').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.getElementById('qr-overlay').style.display='flex';
@@ -263,6 +296,7 @@ document.querySelectorAll('.btn-pay').forEach(btn=>{
 function closeQR(){
   document.getElementById('qr-overlay').style.display='none';
 }
+
 </script>
 
 </body>
