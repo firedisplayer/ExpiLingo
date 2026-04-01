@@ -8,15 +8,12 @@
 
 <style>
 
-/* FUENTE GLOBAL */
-*{
-  font-family:'Bungee', cursive, Arial, sans-serif;
-}
+/* FUENTE */
+*{font-family:'Bungee', cursive, Arial, sans-serif;}
 
 /* VIDEO */
 #bg-video{
-  position:fixed;
-  top:0; left:0;
+  position:fixed; top:0; left:0;
   width:100%; height:100%;
   object-fit:cover;
   z-index:-2;
@@ -35,12 +32,10 @@ section{padding:60px 20px;}
 h1{font-size:40px;}
 hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .slogan span{color:#38bdf8;text-decoration:underline;}
-
 .servicios p{margin:8px;font-size:18px;}
 
 /* PASOS */
 .pasos{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-
 .paso{
   background:#1e293b;
   padding:20px;
@@ -50,13 +45,10 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   transform:translateY(40px);
   transition:all 0.6s ease;
 }
-
-/* ANIMACIÓN */
 .paso.visible{
   opacity:1;
   transform:translateY(0);
 }
-
 .paso:hover{
   transform:translateY(-8px) scale(1.05);
   background:#38bdf8;
@@ -124,17 +116,29 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 }
 .redes a:hover{background:#22c55e;color:black;}
 
-/* QR */
+/* 🔥 OVERLAY ANIMADO */
 #qr-overlay{
-  display:none;
+  display:flex;
   position:fixed;
+  top:0; left:0;
   width:100%; height:100%;
   background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
   flex-direction:column;
   z-index:1000;
+
+  opacity:0;
+  pointer-events:none;
+  transform:scale(0.9);
+  transition:all 0.3s ease;
 }
+#qr-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1);
+}
+
 #qr-overlay img{
   max-width:250px;
   margin:20px 0;
@@ -206,6 +210,7 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 </div>
 </section>
 
+<!-- QR -->
 <div id="qr-overlay">
   <p>📱 Escanea con Nequi</p>
   <img src="qr-nequi.png">
@@ -220,22 +225,19 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 
 <script>
 
-/* ANIMACIÓN SCROLL PASOS */
+/* ANIMACIÓN PASOS */
 const pasos=document.querySelectorAll(".paso");
-
 function mostrarPasos(){
   pasos.forEach(p=>{
-    const top=p.getBoundingClientRect().top;
-    if(top<window.innerHeight-50){
+    if(p.getBoundingClientRect().top < window.innerHeight-50){
       p.classList.add("visible");
     }
   });
 }
-
 window.addEventListener("scroll",mostrarPasos);
 window.addEventListener("load",mostrarPasos);
 
-/* PRECIOS */
+/* PRECIOS + FIX BOTONES */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
@@ -256,6 +258,12 @@ precios.forEach(item=>{
   <p class="descripcion">${item.descripcion}</p>
   <button class="btn-pay">Pagar con Nequi</button>`;
 
+  /* 🔥 BOTÓN FUNCIONANDO */
+  card.querySelector('.btn-pay').addEventListener('click', ()=>{
+    document.getElementById('qr-overlay').classList.add('active');
+  });
+
+  /* EFECTO */
   card.addEventListener("mouseenter", ()=>{
     let cantidad=item.pro?12:Math.round((item.precio/minPrecio)*5);
     for(let i=0;i<cantidad;i++){
@@ -286,15 +294,9 @@ precios.forEach(item=>{
   container.appendChild(card);
 });
 
-/* QR */
-document.querySelectorAll('.btn-pay').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.getElementById('qr-overlay').style.display='flex';
-  });
-});
-
+/* CERRAR */
 function closeQR(){
-  document.getElementById('qr-overlay').style.display='none';
+  document.getElementById('qr-overlay').classList.remove('active');
 }
 
 </script>
