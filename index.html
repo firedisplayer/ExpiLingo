@@ -191,33 +191,18 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 </section>
 
 <div id="qr-overlay">
-  <p>📱 Escanea con Nequi</p>
+  <p id="qr-text">📱 Escanea con Nequi</p>
   <img src="qr-nequi.png">
   <p>💡 O envía el pago al número:</p>
   <p><strong>0092362628</strong></p>
-  <p>📩 Después de pagar, envía tu comprobante:</p>
   <button class="btn-pay" onclick="enviarComprobante()">Enviar comprobante</button>
   <button onclick="closeQR()">Cerrar</button>
 </div>
 
 <script>
 
-/* MENSAJE DINÁMICO */
-let mensajeWhatsApp = "";
+let mensajeWhatsApp = "Hola, quiero información sobre ExpiLingo";
 
-/* ANIMACIÓN PASOS */
-const pasos=document.querySelectorAll(".paso");
-function mostrarPasos(){
-  pasos.forEach(p=>{
-    if(p.getBoundingClientRect().top < window.innerHeight-50){
-      p.classList.add("visible");
-    }
-  });
-}
-window.addEventListener("scroll",mostrarPasos);
-window.addEventListener("load",mostrarPasos);
-
-/* PRECIOS */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
 {titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
@@ -227,7 +212,6 @@ const precios=[
 ];
 
 const container=document.getElementById("precios-container");
-const minPrecio=Math.min(...precios.map(p=>p.precio));
 
 precios.forEach(item=>{
   const card=document.createElement("div");
@@ -239,22 +223,21 @@ precios.forEach(item=>{
   <p class="descripcion">${item.descripcion}</p>
   <button class="btn-pay">Pagar con Nequi</button>`;
 
-  /* GUARDAR PLAN */
   card.querySelector('.btn-pay').addEventListener('click', ()=>{
     mensajeWhatsApp = `Hola, ya realicé un pago por ExpiLingo para el plan ${item.titulo} de ${item.precio.toLocaleString()} COP`;
+
     document.getElementById('qr-overlay').classList.add('active');
+    document.getElementById('qr-text').innerText = `📱 Plan seleccionado: ${item.titulo}`;
   });
 
   container.appendChild(card);
 });
 
-/* WHATSAPP */
 function enviarComprobante(){
   const url = `https://wa.me/573102270396?text=${encodeURIComponent(mensajeWhatsApp)}`;
   window.open(url, '_blank');
 }
 
-/* CERRAR */
 function closeQR(){
   document.getElementById('qr-overlay').classList.remove('active');
 }
