@@ -34,7 +34,7 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .slogan span{color:#38bdf8;text-decoration:underline;}
 .servicios p{margin:8px;font-size:18px;}
 
-/* ===== INTRO PRO ===== */
+/* ===== INTRO SEGURA ===== */
 #intro{
   position:fixed;
   top:0; left:0;
@@ -256,34 +256,39 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 
 <script>
 
-/* INTRO PRO */
-window.addEventListener("load", ()=>{
-
+/* INTRO ULTRA SEGURA */
+function iniciarIntro(){
   const planeta = document.getElementById("planeta");
   const texto = document.getElementById("texto");
   const intro = document.getElementById("intro");
 
-  setTimeout(()=> planeta.classList.add("bajar"), 300);
-  setTimeout(()=> planeta.classList.add("zoom"), 1200);
-  setTimeout(()=> planeta.classList.add("mover"), 2000);
-  setTimeout(()=> texto.classList.add("mostrar"), 2500);
+  if(!planeta || !texto || !intro) return;
+
+  setTimeout(()=> planeta.classList.add("bajar"), 200);
+  setTimeout(()=> planeta.classList.add("zoom"), 1000);
+  setTimeout(()=> planeta.classList.add("mover"), 1800);
+  setTimeout(()=> texto.classList.add("mostrar"), 2300);
 
   setTimeout(()=>{
     planeta.classList.add("fade");
     texto.classList.add("fade");
-  }, 4200);
+  }, 4000);
 
   setTimeout(()=>{
     intro.style.display = "none";
-  }, 5000);
+  }, 4800);
+}
 
-});
+/* EJECUCIÓN SEGURA */
+document.addEventListener("DOMContentLoaded", iniciarIntro);
+
+/* BACKUP POR SI FALLA TODO */
+setTimeout(()=>{
+  const intro = document.getElementById("intro");
+  if(intro) intro.style.display = "none";
+}, 6000);
 
 </script>
-
-</body>
-</html>
-/* TODO TU JS ORIGINAL SIGUE IGUAL */
 
 </body>
 </html>
