@@ -25,6 +25,29 @@
   z-index:-1;
 }
 
+/* 🔥 INTRO (NUEVO) */
+#intro{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:9999;
+}
+#planeta{
+  position:absolute;
+  font-size:90px;
+  top:-200px;
+  left:50%;
+  transform:translateX(-50%);
+  transition:all 0.8s ease;
+  z-index:2;
+}
+
+/* 🔥 OCULTAR CONTENIDO AL INICIO */
+#contenido{
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
 /* GENERAL */
 body{margin:0;color:white;text-align:center;}
 header{background:#111827;padding:20px;font-size:30px;color:#22c55e;}
@@ -33,36 +56,6 @@ h1{font-size:40px;}
 hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 .slogan span{color:#38bdf8;text-decoration:underline;}
 .servicios p{margin:8px;font-size:18px;}
-
-/* INTRO (no rompe nada) */
-#intro{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-#planeta{
-  position:absolute;
-  font-size:90px;
-  top:-200px;
-  left:50%;
-  transform:translateX(-50%);
-  transition:all 0.8s ease;
-}
-
-#textoIntro{
-  position:absolute;
-  font-size:60px;
-  color:#22c55e;
-  opacity:0;
-  left:60%;
-  transition:all 0.8s ease;
-}
 
 /* PASOS */
 .pasos{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
@@ -103,12 +96,26 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
   color:black;
 }
 
+/* PRO */
 .card.pro{border:2px solid #fbbf24;}
 .card.pro h3::after{content:" 👑";}
+.card.pro:hover{
+  background:linear-gradient(120deg,#fcd34d,#fbbf24,#fde68a,#facc15);
+  background-size:600% 600%;
+  animation:shineGold 8s ease infinite;
+  transform:translateY(-10px) scale(1.05);
+  color:black;
+}
+@keyframes shineGold{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
 .precio{font-size:22px;font-weight:bold;margin:10px 0;}
 .descripcion{font-size:14px;margin:10px 0;}
 
+/* BOTÓN */
 .btn-pay{
   margin-top:10px;
   padding:10px 15px;
@@ -132,21 +139,63 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 }
 .redes a:hover{background:#22c55e;color:black;}
 
+/* OVERLAY */
+#qr-overlay{
+  display:flex;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:1000;
+
+  opacity:0;
+  pointer-events:none;
+  transform:scale(0.9);
+  transition:all 0.3s ease;
+}
+#qr-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1);
+}
+
+#qr-overlay img{
+  max-width:250px;
+  margin:20px 0;
+  border:5px solid white;
+  border-radius:15px;
+}
+#qr-overlay strong{
+  color:#22c55e;
+  font-size:22px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  h1{font-size:28px;}
+  .card,.paso,.redes a{width:90%;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <div id="planeta">🌎</div>
-  <div id="textoIntro">ExpiLingo</div>
-</div>
-
 <video id="bg-video" autoplay muted loop playsinline>
 <source src="Fondo.mp4" type="video/mp4">
 </video>
 <div id="bg-overlay"></div>
+
+<!-- 🔥 INTRO -->
+<div id="intro">
+  <div id="planeta">🌎</div>
+</div>
+
+<!-- 🔥 TODO TU CONTENIDO (SIN CAMBIOS) -->
+<div id="contenido">
 
 <header>🌎 ExpiLingo</header>
 
@@ -192,22 +241,65 @@ hr{width:200px;margin:10px auto 30px;border:1px solid #22c55e;}
 </div>
 </section>
 
+</div>
+
+<!-- QR -->
+<div id="qr-overlay">
+  <p>📱 Escanea con Nequi</p>
+  <img src="qr-nequi.png">
+  <p>💡 O envía el pago al número:</p>
+  <p><strong>0092362628</strong></p>
+  <p>📩 Después de pagar, envía tu comprobante:</p>
+
+  <button class="btn-pay" onclick="enviarComprobante()">Enviar comprobante</button>
+  <button onclick="closeQR()">Cerrar</button>
+</div>
+
 <script>
 
-/* INTRO */
-setTimeout(()=>{document.getElementById("planeta").style.top="40%";},200);
-setTimeout(()=>{document.getElementById("planeta").style.transform="translateX(-50%) scale(1.5)";},1000);
-setTimeout(()=>{document.getElementById("planeta").style.left="35%";},1800);
-setTimeout(()=>{
-  const t=document.getElementById("textoIntro");
-  t.style.opacity=1;
-  t.style.left="50%";
-},2300);
-setTimeout(()=>{
-  document.getElementById("intro").style.display="none";
-},4500);
+/* 🔥 ANIMACIÓN INTRO */
+const planeta = document.getElementById("planeta");
+const intro = document.getElementById("intro");
+const contenido = document.getElementById("contenido");
 
-/* PASOS */
+setTimeout(()=>{planeta.style.top="40%";},200);
+setTimeout(()=>{planeta.style.transform="translateX(-50%) scale(1.5)";},1000);
+setTimeout(()=>{planeta.style.left="35%";},1800);
+
+let textoAnimado;
+
+setTimeout(()=>{
+  textoAnimado=document.createElement("div");
+  textoAnimado.innerText="ExpiLingo";
+  textoAnimado.style.position="absolute";
+  textoAnimado.style.fontSize="40px";
+  textoAnimado.style.color="#22c55e";
+  textoAnimado.style.top="45%";
+  textoAnimado.style.left="35%";
+  textoAnimado.style.opacity="0";
+  textoAnimado.style.zIndex="1";
+  textoAnimado.style.transition="all 0.8s ease";
+  intro.appendChild(textoAnimado);
+
+  setTimeout(()=>{
+    textoAnimado.style.opacity="1";
+    textoAnimado.style.left="50%";
+  },50);
+},2600);
+
+/* FADE OUT + ENTRADA WEB */
+setTimeout(()=>{
+  planeta.style.opacity="0";
+  if(textoAnimado) textoAnimado.style.opacity="0";
+},4000);
+
+setTimeout(()=>{intro.style.opacity="0";},4800);
+setTimeout(()=>{intro.style.display="none";},5800);
+setTimeout(()=>{contenido.style.opacity="1";},6800);
+
+/* 🔥 TU SCRIPT ORIGINAL (INTACTO) */
+let mensajeWhatsApp = "Hola, ya realicé un pago por ExpiLingo";
+
 const pasos=document.querySelectorAll(".paso");
 function mostrarPasos(){
   pasos.forEach(p=>{
@@ -219,22 +311,69 @@ function mostrarPasos(){
 window.addEventListener("scroll",mostrarPasos);
 window.addEventListener("load",mostrarPasos);
 
-/* PRECIOS */
 const precios=[
 {titulo:"30 min", precio:20000, descripcion:"Sesión rápida de explicación"},
-{titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"}
+{titulo:"1 hora", precio:30000, descripcion:"Sesión completa de explicación"},
+{titulo:"Básico", precio:15000, descripcion:"3 explicaciones según tu necesidad"},
+{titulo:"Estándar", precio:25000, descripcion:"8 explicaciones según tu necesidad"},
+{titulo:"Pro", precio:100000, descripcion:"Ayudas ilimitadas por una semana", pro:true}
 ];
 
 const container=document.getElementById("precios-container");
+const minPrecio=Math.min(...precios.map(p=>p.precio));
+
 precios.forEach(item=>{
   const card=document.createElement("div");
-  card.className="card";
+  card.className="card"+(item.pro?" pro":"");
   card.innerHTML=`
   <h3>${item.titulo}</h3>
-  <p class="precio">$${item.precio}</p>
-  <p class="descripcion">${item.descripcion}</p>`;
+  <p class="precio">$${item.precio.toLocaleString()} COP</p>
+  <p class="descripcion">${item.descripcion}</p>
+  <button class="btn-pay">Pagar con Nequi</button>`;
+
+  card.querySelector('.btn-pay').addEventListener('click', ()=>{
+    mensajeWhatsApp = `Hola, ya realicé un pago por ExpiLingo para el plan ${item.titulo} de ${item.precio.toLocaleString()} COP`;
+    document.getElementById('qr-overlay').classList.add('active');
+  });
+
+  card.addEventListener("mouseenter", ()=>{
+    let cantidad=item.pro?12:Math.round((item.precio/minPrecio)*5);
+    for(let i=0;i<cantidad;i++){
+      const part=document.createElement("span");
+      part.textContent=item.pro?(Math.random()>0.5?"👑":"💎"):"💵";
+      part.style.position="absolute";
+      part.style.left="50%";
+      part.style.top="50%";
+      part.style.transform="translate(-50%,-50%)";
+      part.style.fontSize="22px";
+
+      card.appendChild(part);
+
+      const ang=Math.random()*2*Math.PI;
+      const dist=80+Math.random()*40;
+      const x=Math.cos(ang)*dist;
+      const y=Math.sin(ang)*dist;
+
+      part.animate([
+        {transform:"translate(-50%,-50%)",opacity:1},
+        {transform:`translate(${x}px,${y}px)`,opacity:0}
+      ],{duration:600});
+
+      setTimeout(()=>part.remove(),600);
+    }
+  });
+
   container.appendChild(card);
 });
+
+function enviarComprobante(){
+  const url = `https://wa.me/573102270396?text=${encodeURIComponent(mensajeWhatsApp)}`;
+  window.open(url, '_blank');
+}
+
+function closeQR(){
+  document.getElementById('qr-overlay').classList.remove('active');
+}
 
 </script>
 
